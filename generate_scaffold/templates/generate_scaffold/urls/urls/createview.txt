@@ -1,0 +1,5 @@
+    url(
+        regex=r'^{{ model_slug }}/create/$',
+        view={{ class_name }}CreateView.as_view(),
+        name='{{ app_name }}_{{ model_slug }}_create'
+    ),

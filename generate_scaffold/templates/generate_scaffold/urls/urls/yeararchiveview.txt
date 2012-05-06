@@ -1,0 +1,5 @@
+{% if is_timestamped %}    url(
+        regex=r'^{{ model_slug }}/archive/(?P<year>\d{4})/$',
+        view={{ class_name }}YearArchiveView.as_view(),
+        name='{{ app_name }}_{{ model_slug }}_year_archive'
+    ),{% endif %}

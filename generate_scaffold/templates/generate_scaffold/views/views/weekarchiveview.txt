@@ -1,0 +1,5 @@
+{% if is_timestamped %}class {{ class_name }}WeekArchiveView(
+    {{ class_name }}DateView, {{ class_name }}BaseListView, WeekArchiveView):
+    pass
+
+{% endif %}

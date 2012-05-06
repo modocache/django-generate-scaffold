@@ -1,0 +1,46 @@
+{% templatetag openblock %} extends '{{ app_name }}/{{ model_slug }}/base.html' {% templatetag closeblock %}
+{% templatetag openblock %} block filename {% templatetag closeblock %}
+  {{ filename }}
+{% templatetag openblock %} endblock {% templatetag closeblock %}
+{% templatetag openblock %} block title {% templatetag closeblock %}
+  {% templatetag openblock %} if object {% templatetag closeblock %}
+    Update {{ class_name }}
+  {% templatetag openblock %} else {% templatetag closeblock %}
+    Create a New {{ class_name }}
+  {% templatetag openblock %} endif {% templatetag closeblock %}
+{% templatetag openblock %} endblock {% templatetag closeblock %}
+{% templatetag openblock %} block header-link {% templatetag closeblock %}
+  {% templatetag openblock %} if object {% templatetag closeblock %}
+    <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_update pk=object.pk {% templatetag closeblock %}'>
+      {{ class_name }} Update
+    </a>
+  {% templatetag openblock %} else {% templatetag closeblock %}
+    <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_create {% templatetag closeblock %}'>
+      {{ class_name }} Create
+    </a>
+  {% templatetag openblock %} endif {% templatetag closeblock %}
+{% templatetag openblock %} endblock {% templatetag closeblock %}
+{% templatetag openblock %} block header-description {% templatetag closeblock %}
+  {% templatetag openblock %} if object {% templatetag closeblock %}
+    A view that displays a form for editing an existing object.
+  {% templatetag openblock %} else {% templatetag closeblock %}
+    A view that displays a form for creating an object.
+  {% templatetag openblock %} endif {% templatetag closeblock %}
+{% templatetag openblock %} endblock {% templatetag closeblock %}
+{% templatetag openblock %} block content {% templatetag closeblock %}
+  <form action='{% templatetag openblock %} if object {% templatetag closeblock %}{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_update pk=object.pk {% templatetag closeblock %}{% templatetag openblock %} else {% templatetag closeblock %}{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_create {% templatetag closeblock %}{% templatetag openblock %} endif {% templatetag closeblock %}' method='post' encoding='utf-8'>
+    <fieldset>
+      {% templatetag openblock %} csrf_token {% templatetag closeblock %}
+      {% templatetag openvariable %} form {% templatetag closevariable %}
+      <div class='form-actions'>
+        <button class='btn btn-large btn-success' type='submit'>
+          {% templatetag openblock %} if object {% templatetag closeblock %}
+            Update
+          {% templatetag openblock %} else {% templatetag closeblock %}
+            Create
+          {% templatetag openblock %} endif {% templatetag closeblock %}
+        </button>
+      </div>
+    </fieldset>
+  </form>
+{% templatetag openblock %} endblock {% templatetag closeblock %}

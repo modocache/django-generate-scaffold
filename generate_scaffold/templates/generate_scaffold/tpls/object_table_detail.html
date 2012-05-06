@@ -1,0 +1,32 @@
+<table class='table table-bordered table-striped'>
+  <thead>
+    <tr>
+      <th>
+        Field
+      </th>
+      <th>
+        Value
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        id
+      </td>
+      <td>
+        <a href='{% templatetag openvariable %} object.get_absolute_url {% templatetag closevariable %}'>
+          {% templatetag openvariable %} object.id|stringformat:".3d" {% templatetag closevariable %}
+        </a>
+      </td>
+    </tr>
+    {% for field in model_fields %}
+    <tr>
+      <td>
+        {{ field }}
+      </td>
+      <td>{% templatetag openvariable %} object.{{ field }} {% templatetag closevariable %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

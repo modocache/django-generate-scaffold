@@ -1,0 +1,7 @@
+class {{ class_name }}DeleteView({{ class_name }}View, DeleteView):
+
+    def get_success_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('{{ app_name }}_{{ model_slug }}_list')
+
+

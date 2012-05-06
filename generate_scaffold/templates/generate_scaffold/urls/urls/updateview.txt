@@ -1,0 +1,5 @@
+    url(
+        regex=r'^{{ model_slug }}/(?P<pk>\d+?)/update/$',
+        view={{ class_name }}UpdateView.as_view(),
+        name='{{ app_name }}_{{ model_slug }}_update'
+    ),

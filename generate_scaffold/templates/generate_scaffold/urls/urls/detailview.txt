@@ -1,0 +1,5 @@
+    url(
+        regex=r'^{{ model_slug }}/(?P<pk>\d+?)/$',
+        view={{ class_name }}DetailView.as_view(),
+        name='{{ app_name }}_{{ model_slug }}_detail'
+    ),

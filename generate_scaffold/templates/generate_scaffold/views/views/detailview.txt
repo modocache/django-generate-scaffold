@@ -1,0 +1,4 @@
+class {{ class_name }}DetailView({{ class_name }}View, DetailView):
+    pass
+
+

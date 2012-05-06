@@ -1,0 +1,5 @@
+{% if is_timestamped %}class {{ class_name }}MonthArchiveView(
+    {{ class_name }}DateView, {{ class_name }}BaseListView, MonthArchiveView):
+    pass
+
+{% endif %}

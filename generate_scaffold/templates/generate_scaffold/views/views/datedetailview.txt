@@ -1,0 +1,4 @@
+{% if is_timestamped %}class {{ class_name }}DateDetailView({{ class_name }}DateView, DateDetailView):
+    pass
+
+{% endif %}

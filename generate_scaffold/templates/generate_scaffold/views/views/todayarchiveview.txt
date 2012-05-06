@@ -1,0 +1,5 @@
+{% if is_timestamped %}class {{ class_name }}TodayArchiveView(
+    {{ class_name }}DateView, {{ class_name }}BaseListView, TodayArchiveView):
+    pass
+
+{% endif %}

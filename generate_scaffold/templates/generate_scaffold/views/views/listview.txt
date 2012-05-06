@@ -1,0 +1,4 @@
+class {{ class_name }}ListView({{ class_name }}BaseListView, ListView):
+    pass
+
+

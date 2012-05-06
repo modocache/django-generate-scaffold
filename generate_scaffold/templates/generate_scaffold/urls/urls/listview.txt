@@ -1,0 +1,5 @@
+    url(
+        regex=r'^{{ model_slug }}/$',
+        view={{ class_name }}ListView.as_view(),
+        name='{{ app_name }}_{{ model_slug }}_list'
+    ),

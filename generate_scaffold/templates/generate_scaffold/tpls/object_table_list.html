@@ -1,0 +1,31 @@
+<p>
+  Click on the primary key value to access the individual {{ class_name }}'s page.
+</p>
+<table class='table table-bordered table-striped'>
+  <thead>
+    <tr>
+      <th>
+        id
+      </th>
+      {% for field in model_fields %}
+        <th>
+          {{ field }}
+        </th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% templatetag openblock %} for object in object_list {% templatetag closeblock %}
+      <tr>
+        <td>
+          <a href='{% templatetag openvariable %} object.get_absolute_url {% templatetag closevariable %}'>
+            {% templatetag openvariable %} object.id|stringformat:".3d" {% templatetag closevariable %}
+          </a>
+        </td>
+        {% for field in model_fields %}
+          <td>{% templatetag openvariable %} object.{{ field }} {% templatetag closevariable %}</td>
+        {% endfor %}
+      </tr>
+    {% templatetag openblock %} endfor {% templatetag closeblock %}
+  </tbody>
+</table>

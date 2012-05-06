@@ -1,0 +1,5 @@
+{% if is_timestamped %}class {{ class_name }}YearArchiveView(
+    {{ class_name }}DateView, {{ class_name }}BaseListView, YearArchiveView):
+    make_object_list = True
+
+{% endif %}

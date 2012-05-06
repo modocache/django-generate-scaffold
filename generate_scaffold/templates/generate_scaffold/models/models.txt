@@ -1,0 +1,17 @@
+
+{% if import_now %}from django.utils.timezone import now
+{% endif %}class {{ class_name }}(models.Model):
+{% for field in fields %}    {{ field }}{% endfor %}{% if is_timestamped_model %}    created_at = models.DateTimeField(
+        auto_now_add=True,
+        default=now(),
+        editable=False,
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        default=now(),
+        editable=False,
+    ){% endif %}
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('{{ app_name }}_{{ model_slug }}_detail', (), {'pk': self.pk})

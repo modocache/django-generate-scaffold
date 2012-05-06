@@ -1,0 +1,32 @@
+{% templatetag openblock %} if page_obj.has_previous or page_obj.has_next {% templatetag closeblock %}
+  <div class='pagination pagination-centered'>
+    <ul>
+      {% templatetag openblock %} if page_obj.has_previous {% templatetag closeblock %}
+        <li>
+          <a href='?page={% templatetag openvariable %} page_obj.previous_page_number {% templatetag closevariable %}'>
+            &lt;
+          </a>
+        </li>
+      {% templatetag openblock %} else {% templatetag closeblock %}
+        <li class='disabled'>
+          <a>
+           &lt;
+          </a>
+        </li>
+      {% templatetag openblock %} endif {% templatetag closeblock %}
+      {% templatetag openblock %} if page_obj.has_next {% templatetag closeblock %}
+        <li>
+          <a href='?page={% templatetag openvariable %} page_obj.next_page_number {% templatetag closevariable %}'>
+            &gt;
+          </a>
+        </li>
+      {% templatetag openblock %} else {% templatetag closeblock %}
+        <li class='disabled'>
+          <a>
+            &gt;
+          </a>
+        </li>
+      {% templatetag openblock %} endif {% templatetag closeblock %}
+    </ul>
+  </div>
+{% templatetag openblock %} endif {% templatetag closeblock %}

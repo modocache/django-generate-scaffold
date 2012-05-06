@@ -1,0 +1,7 @@
+{% if is_timestamped %}    url(
+        regex=r'^{{ model_slug }}/archive/(?P<year>\d{4})/'
+               '(?P<month>\d{1,2})/'
+               'week/(?P<week>\d{1,2})/$',
+        view={{ class_name }}WeekArchiveView.as_view(),
+        name='{{ app_name }}_{{ model_slug }}_week_archive'
+    ),{% endif %}

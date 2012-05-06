@@ -1,0 +1,5 @@
+    url(
+        regex=r'^{{ model_slug }}/(?P<pk>\d+?)/delete/$',
+        view={{ class_name }}DeleteView.as_view(),
+        name='{{ app_name }}_{{ model_slug }}_delete'
+    ),

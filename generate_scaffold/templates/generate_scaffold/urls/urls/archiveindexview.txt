@@ -1,0 +1,5 @@
+{% if is_timestamped %}    url(
+        regex=r'^{{ model_slug }}/archive/$',
+        view={{ class_name }}ArchiveIndexView.as_view(),
+        name='{{ app_name }}_{{ model_slug }}_archive_index'
+    ),{% endif %}

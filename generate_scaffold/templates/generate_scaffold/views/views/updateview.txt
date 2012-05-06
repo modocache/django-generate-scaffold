@@ -1,0 +1,4 @@
+class {{ class_name }}UpdateView({{ class_name }}View, UpdateView):
+    pass
+
+

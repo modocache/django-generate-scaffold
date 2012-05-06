@@ -1,0 +1,1 @@
+{{ field_name }} = models.EmailField(max_length=254)
