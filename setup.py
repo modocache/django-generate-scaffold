@@ -13,9 +13,10 @@ setup(
     install_requires=['Django>=1.3'],
     packages=[
         'generate_scaffold',
+        'generate_scaffold.generators',
         'generate_scaffold.management',
         'generate_scaffold.management.commands',
-        'generate_scaffold.management.utils',
+        'generate_scaffold.utils',
     ],
     package_data={'generate_scaffold': [
         'templates/generate_scaffold/models/*.txt',

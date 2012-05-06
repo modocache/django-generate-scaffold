@@ -1,4 +1,3 @@
-import inspect
 import os
 from optparse import make_option
 
@@ -9,14 +8,14 @@ from django.template import Context
 from django.template.defaultfilters import slugify
 from django.template.loader import get_template
 
+from generate_scaffold.generators import ModelsGenerator, GeneratorError
 from generate_scaffold.management.transactions import FilesystemTransaction
-from generate_scaffold.management.utils.cacheclear import clean_pyc_in_dir, \
-                                                          reload_django_appcache
-from generate_scaffold.management.utils.directories import get_templates_in_dir
-from generate_scaffold.management.utils.modules import import_child
-from generate_scaffold.management.utils.strings import dumb_capitalized, \
-                                                       get_valid_variable
 from generate_scaffold.management.verbosity import VerboseCommandMixin
+from generate_scaffold.utils.cacheclear import clean_pyc_in_dir, \
+                                               reload_django_appcache
+from generate_scaffold.utils.directories import get_templates_in_dir
+from generate_scaffold.utils.modules import import_child
+from generate_scaffold.utils.strings import dumb_capitalized
 
 
 class Command(VerboseCommandMixin, BaseCommand):
@@ -56,127 +55,8 @@ class Command(VerboseCommandMixin, BaseCommand):
 
     def __init__(self, *args, **kwargs):
         super(Command, self).__init__(*args, **kwargs)
-
         self.verbose = False
         self.dry_run = False
-        self.field_aliases = {
-            'autofield': ['auto', 'autofield'],
-            'bigintegerfield': ['bigint', 'biginteger', 'bigintfield', 'bigintegerfield'],
-            'booleanfield': ['bool', 'boolean', 'booleanfield'],
-            'charfield': ['string', 'char', 'charfield'],
-            'commaseparatedintegerfield': ['comma', 'commaseparatedint', 'commaseparatedinteger', 'commaseparatedintegerfield'],
-            'datefield': ['date', 'datefield'],
-            'datetimefield': ['datetime', 'datetimefield'],
-            'decimalfield': ['decimal', 'decimalfield'],
-            'emailfield': ['email', 'emailfield'],
-            'filefield': ['file', 'filefield'],
-            'filepathfield': ['path', 'filepath', 'filepathfield'],
-            'floatfield': ['float', 'floatfield'],
-            'foreignkey': ['foreign', 'foreignkey', 'foreignkeyfield'],
-            'genericipaddressfield': ['genericip', 'genericipaddress', 'genericipaddressfield'],
-            'imagefield': ['image', 'imagefield'],
-            'integerfield': ['int', 'integer', 'integerfield'],
-            'ipaddressfield': ['ip', 'ipaddress', 'ipaddressfield'],
-            'manytomanyfield': ['many', 'manytomany', 'manytomanyfield'],
-            'nullbooleanfield': ['nullbool', 'nullboolean', 'nullbooleanfield'],
-            'onetoonefield': ['one', 'onetoone', 'onetoonefield'],
-            'positiveintegerfield': ['posint', 'positiveint', 'positiveinteger', 'positiveintegerfield'],
-            'slugfield': ['slug', 'slugfield'],
-            'smallintegerfield': ['smallint', 'smallinteger', 'smallintegerfield'],
-            'textfield': ['text', 'textfield'],
-            'timefield': ['time', 'timefield'],
-            'urlfield': ['url', 'urlfield'],
-        }
-
-    def _get_rendered_model_field(self, field_name, field_type):
-        # Only use lower case for field names
-        original_field_name = field_name
-        field_name = get_valid_variable(field_name).lower()
-        if not field_name:
-            raise CommandError(
-                '{0} is not a valid field name. '
-                'Please choose a different name.'.format(original_field_name)
-            )
-
-        other_model = None
-        relationship_fields = \
-            set(['foreignkey', 'manytomanyfield', 'onetoonefield'])
-
-        if '=' in field_type:
-            field_type, other_model = field_type.split('=')
-
-        for field_key, aliases in self.field_aliases.items():
-
-            if field_type in aliases:
-                tpl_name = \
-                    'generate_scaffold/models/fields/{0}.txt'.format(
-                        field_key
-                    )
-                tpl = get_template(tpl_name)
-                c = {'field_name': field_name}
-
-                if other_model:
-                    c['other_model'] = other_model
-                elif field_key in relationship_fields:
-                    raise CommandError(
-                        '{fk} requires a related model to be specified.\n'
-                        'Example: {fn}:{fk}=OtherModel'.format(
-                            fk=field_key, fn=field_name
-                        )
-                    )
-
-                context = Context(c)
-                return tpl.render(context)
-
-        raise CommandError(
-            'Could not process {0} field type: {1}'.format(
-                field_name, field_type)
-        )
-
-    def _get_rendered_model(
-        self, app_name, app_models_module, model_name, model_field_args):
-
-        rendered_fields = []
-        for model_field_arg in model_field_args:
-            field_name, field_type = model_field_arg.split(':')
-            rendered_field = \
-                self._get_rendered_model_field(field_name, field_type)
-            rendered_fields.append(rendered_field)
-
-        app_models_modules = inspect.getmembers(
-            app_models_module, inspect.ismodule)
-
-        if not [m for m in app_models_modules
-          if m[0] == 'models' and m[-1].__name__ == 'django.db.models']:
-            raise CommandError(
-                'Sorry, {0} requires the `django.db.models` '
-                'module be imported in your models.py file.\n'
-                'Please add the following statement to your '
-                'models.py file and try again:\n'
-                'from django.db import models'.format(self.command_name)
-            )
-
-        app_models_functions = inspect.getmembers(
-            app_models_module, inspect.isfunction)
-
-        import_now = self.is_timestamped
-        if [f for f in app_models_functions
-          if f[0] == 'now' and f[-1].__module__ == 'django.utils.timezone']:
-            self.log('from django.utils.timezone import now detected')
-            import_now = False
-
-        model_template = get_template('generate_scaffold/models/models.txt')
-        model_slug = slugify(model_name)
-        class_name = dumb_capitalized(model_name)
-        c = {
-            'import_now': import_now,
-            'app_name': app_name,
-            'model_slug': model_slug,
-            'class_name': class_name,
-            'fields': rendered_fields,
-            'is_timestamped_model': self.is_timestamped,
-        }
-        return model_template.render(Context(c))
 
     def _get_rendered_views(self, app_name, model_name):
         views_class_templates = \
@@ -309,28 +189,6 @@ class Command(VerboseCommandMixin, BaseCommand):
         except IndexError:
             raise CommandError('You must provide a model_name.')
 
-        # Validate model name.
-        original_model_name = model_name
-        model_name = get_valid_variable(model_name)
-        if not model_name:
-            raise CommandError(
-                '{0} is not a valid model name. '
-                'Please choose a different name.'.format(original_model_name)
-            )
-
-        app_models_import_path = '{0}.models'.format(app_name)
-        try:
-            app_models_module = import_child(app_models_import_path)
-        except ImportError:
-            raise CommandError(
-                'Could not import {0}\n'
-                'Make sure your current models are valid '
-                'and try again.'.format(app_models_import_path))
-
-        if hasattr(app_models_module, dumb_capitalized(model_name)):
-            raise CommandError('{0}.{1} already exists.'.format(
-                app_models_import_path, dumb_capitalized(model_name)))
-
         app_views_dirpath = os.path.join(app_dirpath, 'views')
         model_views_filename = '{0}_views.py'.format(slugify(model_name))
         model_views_filepath = os.path.join(
@@ -340,20 +198,29 @@ class Command(VerboseCommandMixin, BaseCommand):
             raise CommandError(
                 '{0} already exists.'.format(model_views_filepath))
 
-        model_field_args = args[2:]
+        pos_args = [a.split(':') for a in args[2:]]
+        model_field_args = []
+        for a in pos_args:
+            # Split for other_model relationship
+            split = [item for sublist in a for item in sublist.split('=')]
+            model_field_args.append(split)
+
         if not model_field_args:
             # TODO - Allow models with only a primary key?
             raise CommandError('Cannot generate model with no fields.')
 
-        for model_field_arg in model_field_args:
-            if ':' not in model_field_arg:
-                raise CommandError(
-                    'No field type specified for '
-                    'model field: {0}'.format(model_field_arg)
-                )
+        for arg in [a for a in model_field_args if len(a) < 2]:
+            raise CommandError(
+                'No field type specified for '
+                'model field: {0}'.format(arg)
+            )
 
-        rendered_model = self._get_rendered_model(
-            app_name, app_models_module, model_name, model_field_args)
+        models_generator = ModelsGenerator(app_name)
+        try:
+            rendered_model = models_generator.render_model(
+                model_name, model_field_args)
+        except GeneratorError:
+            raise CommandError('An error occurred when generating the model.')
 
         app_urls_filepath = os.path.join(app_dirpath, 'urls.py')
         if not os.path.isfile(app_urls_filepath) and self.dry_run:
