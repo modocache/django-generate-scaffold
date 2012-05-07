@@ -8,7 +8,8 @@ from django.template import Context
 from django.template.defaultfilters import slugify
 from django.template.loader import get_template
 
-from generate_scaffold.generators import ModelsGenerator, GeneratorError
+from generate_scaffold.generators import ModelsGenerator, ViewsGenerator, \
+                                         GeneratorError
 from generate_scaffold.management.transactions import FilesystemTransaction
 from generate_scaffold.management.verbosity import VerboseCommandMixin
 from generate_scaffold.utils.cacheclear import clean_pyc_in_dir, \
@@ -57,35 +58,6 @@ class Command(VerboseCommandMixin, BaseCommand):
         super(Command, self).__init__(*args, **kwargs)
         self.verbose = False
         self.dry_run = False
-
-    def _get_rendered_views(self, app_name, model_name):
-        views_class_templates = \
-            get_templates_in_dir('generate_scaffold/views/views')
-
-        model_slug = slugify(model_name)
-        class_name = dumb_capitalized(model_name)
-
-        rendered_views_classes = []
-        for view_class_template in views_class_templates:
-
-            t = get_template(view_class_template)
-            c = {
-                'app_name': app_name,
-                'model_slug': model_slug,
-                'class_name': class_name,
-                'is_timestamped': self.is_timestamped,
-            }
-            rendered_views_classes.append(t.render(Context(c)))
-
-        views_template = get_template('generate_scaffold/views/views.txt')
-        views_context = {
-            'app_name': app_name,
-            'class_name': class_name,
-            'model_slug': model_slug,
-            'views': rendered_views_classes,
-            'is_timestamped': self.is_timestamped,
-        }
-        return views_template.render(Context(views_context))
 
     def _get_rendered_urls(self, app_name, model_name, is_urlpatterns_available):
         url_pattern_templates = \
@@ -266,7 +238,9 @@ class Command(VerboseCommandMixin, BaseCommand):
             else:
                 self.msg('exists', app_views_init_filepath)
 
-            rendered_views = self._get_rendered_views(app_name, model_name)
+            views_generator = ViewsGenerator(app_name)
+            rendered_views = views_generator.render_views(
+                model_name, self.is_timestamped)
 
             with transaction.open(model_views_filepath, 'a+') as f:
                 f.write(rendered_views)
