@@ -2,3 +2,4 @@ from generate_scaffold.generators.base import GeneratorError
 from generate_scaffold.generators.models import ModelsGenerator
 from generate_scaffold.generators.views import ViewsGenerator
 from generate_scaffold.generators.urls import UrlsGenerator
+from generate_scaffold.generators.templates import TemplatesGenerator

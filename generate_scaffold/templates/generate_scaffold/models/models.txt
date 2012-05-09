@@ -1,5 +1,6 @@
 
-{% if import_now %}from django.utils.timezone import now
+{% if import_db_models %}from django.db import models
+{% endif %}{% if import_now %}from django.utils.timezone import now
 {% endif %}class {{ class_name }}(models.Model):
 {% for field in fields %}    {{ field }}{% endfor %}{% if is_timestamped_model %}    created_at = models.DateTimeField(
         auto_now_add=True,

@@ -64,16 +64,10 @@ class ModelsGenerator(BaseGenerator):
         available_modules = inspect.getmembers(
             app_models_module, inspect.ismodule)
 
+        import_db_models = False
         if not [m for m in available_modules
           if m[0] == 'models' and m[-1].__name__ == 'django.db.models']:
-            # FIXME - Accomodate for this.
-            raise GeneratorError(
-                'Sorry, {0} requires the `django.db.models` '
-                'module be imported in your models.py file.\n'
-                'Please add the following statement to your '
-                'models.py file and try again:\n'
-                'from django.db import models'.format(self.command_name)
-            )
+            import_db_models = True
 
         app_models_functions = inspect.getmembers(
             app_models_module, inspect.isfunction)
@@ -87,6 +81,7 @@ class ModelsGenerator(BaseGenerator):
         model_slug = slugify(model_name)
         class_name = dumb_capitalized(model_name)
         c = {
+            'import_db_models': import_db_models,
             'import_now': import_now,
             'app_name': self.app_name,
             'model_slug': model_slug,

@@ -54,10 +54,15 @@ class BaseGenerator(object):
 
     def get_app_module(self, module_name):
         import_path = '{0}.{1}'.format(self.app_name, module_name)
+        import_filepath = '{0}/{1}.py'.format(self.app_name, module_name)
 
         try:
             module = import_child(import_path)
         except ImportError:
-            raise GeneratorError('Could not import {0}.'.format(import_path))
+            raise GeneratorError(
+                'Could not import {0}. Make sure {1} exists and does not '
+                'contain any syntax '
+                'errors.'.format(import_path, import_filepath)
+            )
 
         return module
