@@ -26,7 +26,7 @@ class Command(VerboseCommandMixin, BaseCommand):
         'blog:foreignkey=Blog'.format(cmd_name=command_name)
     )
     option_list = BaseCommand.option_list + (
-        make_option('-d', '--dry-run',
+        make_option('-n', '--dry-run',
             action='store_true',
             dest='dry_run',
             default=False,
@@ -120,8 +120,6 @@ class Command(VerboseCommandMixin, BaseCommand):
             raise CommandError(
                 'Could not generate model.\n{0}'.format(err)
             )
-
-        print rendered_model
 
         app_urls_filepath = os.path.join(app_dirpath, 'urls.py')
         if not os.path.isfile(app_urls_filepath) and self.dry_run:
