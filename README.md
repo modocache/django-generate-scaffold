@@ -9,18 +9,22 @@ available [here](http://vimeo.com/42399125).
 
 ## Usage
 
-1. Install `django-generate-scaffold`
+- Install `django-generate-scaffold`
 
-    $ pip install django-generate-scaffold
+        $ pip install django-generate-scaffold
 
-2. Add `generate_scaffold` to your `INSTALLED_APPS`
-3. Run the `generatescaffold` management command
+- Add `generate_scaffold` to your `INSTALLED_APPS`
+- Run the `generatescaffold` management command
 
-    $ python manage.py generatescaffold --help
-    ... displays usage
-    $ python manage.py generatescaffold blogs Post title:string body:text is_public:bool blog:foreignkey=Blog
-    ... Generates a Post model, with title (CharField), body (TextField), is_public (BooleanField),
-    ...     and blog (ForeignKey) fields.
+
+        $ python manage.py generatescaffold --help
+        ... displays usage
+
+- Create a model using the syntax in the help message
+
+        $ python manage.py generatescaffold blogs Post title:string body:text is_public:bool blog:foreignkey=Blog
+        ... Generates a Post model, with title (CharField), body (TextField),
+        ...     is_public (BooleanField), and blog (ForeignKey) fields.
 
 
 ## Development
