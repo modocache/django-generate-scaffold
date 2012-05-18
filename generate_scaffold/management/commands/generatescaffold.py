@@ -40,13 +40,6 @@ class Command(VerboseCommandMixin, BaseCommand):
             help='Create models with created_at and updated_at '
                  'DateTimeFields.'
         ),
-        make_option('--naive-time',
-            action='store_true',
-            dest='is_naive_time',
-            default=False,
-            help='Use Python datetime in place of Django timezone-'
-                 'aware datetimes.'
-        ),
     )
 
     def __init__(self, *args, **kwargs):
@@ -58,7 +51,6 @@ class Command(VerboseCommandMixin, BaseCommand):
         self.verbose = int(options.get('verbosity')) > 1
         self.dry_run = options.get('dry_run', False)
         self.is_timestamped = options.get('is_timestamped_model', True)
-        self.is_naive_time = options.get('is_naive_time', False)
 
         try:
             app_name = args[0]

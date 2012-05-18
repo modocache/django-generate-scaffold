@@ -6,6 +6,8 @@ setup(
     version=get_version(),
     description='Generate a Django model, views, URLconf, '
                 'and templates on the command line in seconds.',
+    long_description='Please see the Github page for details: '
+                     'http://github.com/modocache/django-generate-scaffold',
     keywords='django generate scaffold',
     author='modocache',
     author_email='modocache@gmail.com',
@@ -28,11 +30,11 @@ setup(
         'templates/generate_scaffold/views/views/*.txt',
     ]},
     classifiers=[
-        'Development Status :: 3 - Alpha'
+        'Development Status :: 3 - Alpha',
         'Environment :: Console',
         'Framework :: Django',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License'
+        'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Software Development :: Code Generators',
