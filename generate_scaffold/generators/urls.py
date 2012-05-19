@@ -4,20 +4,25 @@ from django.template.loader import get_template
 
 from generate_scaffold.generators.base import BaseGenerator
 from generate_scaffold.utils.directories import get_templates_in_dir
-from generate_scaffold.utils.strings import dumb_capitalized
 
 
 class UrlsGenerator(BaseGenerator):
 
-    def render_urls(self, model_name, is_timestamped=True):
+    def render_urls(self, model, timestamp_fieldname=None):
         urls_module = self.get_app_module('urls')
         is_urlpatterns_available = \
             hasattr(urls_module, 'urlpatterns')
 
         url_pattern_templates = \
             get_templates_in_dir('generate_scaffold/urls/urls')
-        model_slug = slugify(model_name)
-        class_name = dumb_capitalized(model_name)
+
+        class_name = model._meta.concrete_model.__name__
+        model_slug = slugify(class_name)
+
+        if self.get_timestamp_field(model, timestamp_fieldname):
+            is_timestamped = True
+        else:
+            is_timestamped = False
 
         rendered_url_patterns = []
         for url_pattern_template in url_pattern_templates:

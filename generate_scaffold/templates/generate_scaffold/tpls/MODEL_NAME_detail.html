@@ -17,7 +17,7 @@
       </span>
     </li>
     <li>
-      <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_year_archive year=object.created_at.year {% templatetag closeblock %}'>
+      <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_year_archive year=object.{{ timestamp_field }}.year {% templatetag closeblock %}'>
         Year Archive
       </a>
       <span class='divider'>
@@ -25,7 +25,7 @@
       </span>
     </li>
     <li>
-      <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_month_archive year=object.created_at.year month=object.created_at.month {% templatetag closeblock %}'>
+      <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_month_archive year=object.{{ timestamp_field }}.year month=object.{{ timestamp_field }}.month {% templatetag closeblock %}'>
         Month Archive
       </a>
       <span class='divider'>
@@ -33,7 +33,7 @@
       </span>
     </li>
     <li>
-      <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_day_archive year=object.created_at.year month=object.created_at.month day=object.created_at.day {% templatetag closeblock %}'>
+      <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_day_archive year=object.{{ timestamp_field }}.year month=object.{{ timestamp_field }}.month day=object.{{ timestamp_field }}.day {% templatetag closeblock %}'>
         Day Archive
       </a>
       <span class='divider'>
@@ -41,7 +41,7 @@
       </span>
     </li>
     <li>
-      <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_date_detail year=object.created_at.year month=object.created_at.month day=object.created_at.day pk=object.pk {% templatetag closeblock %}'>
+      <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_date_detail year=object.{{ timestamp_field }}.year month=object.{{ timestamp_field }}.month day=object.{{ timestamp_field }}.day pk=object.pk {% templatetag closeblock %}'>
         Date Detail
       </a>
     </li>

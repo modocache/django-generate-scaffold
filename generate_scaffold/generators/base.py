@@ -1,3 +1,6 @@
+from django.db.models.fields import DateField, DateTimeField, \
+                                    FieldDoesNotExist
+
 from generate_scaffold.utils.modules import import_child
 
 
@@ -66,3 +69,27 @@ class BaseGenerator(object):
             )
 
         return module
+
+    def get_timestamp_field(self, model, timestamp_fieldname):
+        if timestamp_fieldname:
+            try:
+                timestamp_field = model._meta.get_field(timestamp_fieldname)
+            except FieldDoesNotExist:
+                raise GeneratorError(
+                    '{0} does not have a field named "{1}"'.format(
+                        model, timestamp_fieldname)
+                )
+            if type(timestamp_field) not in [DateField, DateTimeField]:
+                raise GeneratorError(
+                    '{0} is not a DateField or a DateTimeField, it cannot '
+                    'be used as a timestamp field.'.format(
+                        timestamp_field)
+                )
+            return timestamp_field
+
+        else:
+            for field in model._meta._fields():
+                if type(field) in [DateField, DateTimeField]:
+                    return field
+
+        return None

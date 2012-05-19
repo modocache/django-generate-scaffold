@@ -3,6 +3,7 @@ from optparse import make_option
 
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+from django.db.models import get_model
 from django.template.defaultfilters import slugify
 
 from generate_scaffold.generators import ModelsGenerator, ViewsGenerator, \
@@ -12,6 +13,7 @@ from generate_scaffold.management.transactions import FilesystemTransaction
 from generate_scaffold.management.verbosity import VerboseCommandMixin
 from generate_scaffold.utils.cacheclear import clean_pyc_in_dir, \
                                                reload_django_appcache
+from generate_scaffold.utils.modules import import_child
 
 
 class Command(VerboseCommandMixin, BaseCommand):
@@ -26,31 +28,43 @@ class Command(VerboseCommandMixin, BaseCommand):
         'blog:foreignkey=Blog'.format(cmd_name=command_name)
     )
     option_list = BaseCommand.option_list + (
-        make_option('-n', '--dry-run',
+        make_option('-d', '--dry-run',
             action='store_true',
             dest='dry_run',
             default=False,
             help='Do not actually do anything, but print what '
                  'would have happened to the console.'
         ),
-        make_option('-t', '--no-timestamps',
+        make_option('-m', '--model',
+            dest='existing_model',
+            help='An existing model to generate views/templates for.'
+        ),
+        make_option('-t', '--timestamp-field',
+            dest='timestamp_fieldname',
+            help='The name of the field used as a timestamp for date-based '
+                 'views. This option may only be used when passing a model '
+                 'via the `--model` option.'
+        ),
+        make_option('-n', '--no-timestamps',
             action='store_false',
-            dest='is_timestamped_model',
+            dest='is_timestamped',
             default=True,
-            help='Create models with created_at and updated_at '
-                 'DateTimeFields.'
+            help='Do not automatically append created_at and updated_at '
+                 'DateTimeFields to generated models.'
         ),
     )
-
-    def __init__(self, *args, **kwargs):
-        super(Command, self).__init__(*args, **kwargs)
-        self.verbose = False
-        self.dry_run = False
 
     def handle(self, *args, **options):
         self.verbose = int(options.get('verbosity')) > 1
         self.dry_run = options.get('dry_run', False)
-        self.is_timestamped = options.get('is_timestamped_model', True)
+        self.is_timestamped = options.get('is_timestamped', True)
+        self.existing_model = options.get('existing_model', None)
+        self.timestamp_fieldname = options.get('timestamp_fieldname', None)
+
+        if self.timestamp_fieldname and not self.existing_model:
+            raise CommandError(
+                'The --timestamp-field option can only be used if --model '
+                'is specified.')
 
         try:
             app_name = args[0]
@@ -73,16 +87,20 @@ class Command(VerboseCommandMixin, BaseCommand):
 
         app_dirpath = app_module.__path__[0]
 
-        try:
-            model_name = args[1]
-        except IndexError:
-            raise CommandError('You must provide a model_name.')
+        if not self.existing_model:
+            try:
+                model_name = args[1]
+            except IndexError:
+                raise CommandError('You must provide a model_name.')
+        else:
+            model_name = self.existing_model
 
         app_views_dirpath = os.path.join(app_dirpath, 'views')
         model_views_filename = '{0}_views.py'.format(slugify(model_name))
         model_views_filepath = os.path.join(
             app_views_dirpath, model_views_filename)
 
+        # TODO - Append to views file if already exists
         if os.path.isfile(model_views_filepath):
             raise CommandError(
                 '{0} already exists.'.format(model_views_filepath))
@@ -94,7 +112,7 @@ class Command(VerboseCommandMixin, BaseCommand):
             split = [item for sublist in a for item in sublist.split('=')]
             model_field_args.append(split)
 
-        if not model_field_args:
+        if not model_field_args and not self.existing_model:
             # TODO - Allow models with only a primary key?
             raise CommandError('Cannot generate model with no fields.')
 
@@ -104,14 +122,16 @@ class Command(VerboseCommandMixin, BaseCommand):
                 'model field: {0}'.format(arg)
             )
 
-        models_generator = ModelsGenerator(app_name)
-        try:
-            rendered_model = models_generator.render_model(
-                model_name, model_field_args)
-        except GeneratorError as err:
-            raise CommandError(
-                'Could not generate model.\n{0}'.format(err)
-            )
+        if not self.existing_model:
+            models_generator = ModelsGenerator(app_name)
+            try:
+                rendered_model, rendered_model_name = \
+                    models_generator.render_model(
+                        model_name, model_field_args, self.is_timestamped)
+            except GeneratorError as err:
+                raise CommandError(
+                    'Could not generate model.\n{0}'.format(err)
+                )
 
         app_urls_filepath = os.path.join(app_dirpath, 'urls.py')
         if not os.path.isfile(app_urls_filepath) and self.dry_run:
@@ -130,14 +150,45 @@ class Command(VerboseCommandMixin, BaseCommand):
             ### Generate model ###
             app_models_filepath = os.path.join(app_dirpath, 'models.py')
 
-            with transaction.open(app_models_filepath, 'a+') as f:
-                f.write(rendered_model)
-                f.seek(0)
-                self.log(f.read())
+            if not self.existing_model:
+                with transaction.open(app_models_filepath, 'a+') as f:
+                    f.write(rendered_model)
+                    f.seek(0)
+                    self.log(f.read())
 
-            # FIXME - Reload models
-            reload_django_appcache()
-            exec('from {0}.models import *'.format(app_name))
+                # FIXME - Reload models, use namespace
+                reload_django_appcache()
+                exec('from {0}.models import *'.format(app_name))
+
+            # The rest of the generators use model introspection to
+            # generate views, urlpatterns, etc.
+            if not self.existing_model and self.dry_run:
+                # Since the model is not actually created on dry run,
+                # execute the model code. This is probably a Very Bad
+                # Idea.
+                with open(app_models_filepath, 'r') as f:
+                    code = compile(
+                        f.read() + rendered_model, '<string>', 'exec')
+
+                # Ensure django.db.models is available in namespace
+                import_child('django.db.models')
+
+                # FIXME - Use namespace dictionary
+                exec code in globals()
+
+                # Get reference to generated_model
+                code_str = 'generated_model = {0}().__class__'.format(
+                        rendered_model_name)
+                code = compile(code_str, '<string>', 'exec')
+                exec code in globals()
+                generated_model = globals()['generated_model']
+            else:
+                generated_model = get_model(app_name, model_name)
+
+            if not generated_model:
+                raise CommandError(
+                    'Something when wrong when generating model '
+                    '{0}'.format(model_name))
 
 
             ### Generate views ###
@@ -159,7 +210,7 @@ class Command(VerboseCommandMixin, BaseCommand):
 
             views_generator = ViewsGenerator(app_name)
             rendered_views = views_generator.render_views(
-                model_name, self.is_timestamped)
+                generated_model, self.timestamp_fieldname)
 
             with transaction.open(model_views_filepath, 'a+') as f:
                 f.write(rendered_views)
@@ -179,7 +230,7 @@ class Command(VerboseCommandMixin, BaseCommand):
 
             urls_generator = UrlsGenerator(app_name)
             rendered_urls = urls_generator.render_urls(
-                model_name, self.is_timestamped)
+                generated_model, self.timestamp_fieldname)
 
             with transaction.open(app_urls_filepath, 'a+') as f:
                 f.write(rendered_urls)
@@ -202,16 +253,11 @@ class Command(VerboseCommandMixin, BaseCommand):
 
             templates_generator = TemplatesGenerator(app_name)
 
-            try:
-                model_fields = templates_generator.get_model_fields(model_name)
-            except GeneratorError:
-                if self.dry_run:
-                    model_fields = []
-                else:
-                    raise
-
             rendered_templates = templates_generator.render_templates(
-                model_name, model_fields, model_templates_dirpath)
+                generated_model,
+                model_templates_dirpath,
+                self.timestamp_fieldname
+            )
 
             for dst_abspath, rendered_template in rendered_templates:
                 if os.path.isfile(dst_abspath):

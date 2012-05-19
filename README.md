@@ -9,22 +9,50 @@ available [here](http://vimeo.com/42399125).
 
 ## Usage
 
-- Install `django-generate-scaffold`
+### Generating Models, Views, URL Patterns, and Templates
+
+- Install `django-generate-scaffold`:
 
         $ pip install django-generate-scaffold
 
 - Add `generate_scaffold` to your `INSTALLED_APPS`
-- Run the `generatescaffold` management command
+- Run the `generatescaffold` management command:
 
 
         $ python manage.py generatescaffold --help
         ... displays usage
 
-- Create a model using the syntax in the help message
+- Create a model using the syntax in the help message:
 
         $ python manage.py generatescaffold blogs Post title:string body:text is_public:bool blog:foreignkey=Blog
         ... Generates a Post model, with title (CharField), body (TextField),
         ...     is_public (BooleanField), and blog (ForeignKey) fields.
+
+### Generating Views, etc. Based on Existing Models
+
+- Alternatively, you can generate views, urlpatterns, and templates for an existing model:
+
+        $ python manage.py generatescaffold blogs --model Post
+        ... Generates views, etc. for Post
+
+
+- Note that if the model specified with the `--model` option has a `DateField` or a `DateTimeField`,
+  date-based generic views will be generated based on that field. To specify a specific field to use,
+  pass in the `--timestamp-field` option:
+
+        $ python manage.py generatescaffold blogs --model Post --timestamp-field ctime
+
+#### Limitations When Using Existing Models
+
+For best results, existing models should implement a `get_absolute_url` method
+which conforms to the urlpatterns used by `django-generate-scaffold`:
+
+        @models.permalink
+        def get_absolute_url(self):
+            return ('<app_name>_<model_name>_detail', (), {'pk': self.pk})
+
+Not conforming to this model will lead to broken links and potentially other
+issues when rendering templates.
 
 
 ## Development

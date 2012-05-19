@@ -698,9 +698,11 @@
                     </a>
                   </li>
                   {% templatetag openblock %} if object {% templatetag closeblock %}
-                    <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_date_detail year=object.created_at.year month=object.created_at.month day=object.created_at.day pk=object.pk {% templatetag closeblock %}'>
+                    <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_date_detail year=object.{{ timestamp_field }}.year month=object.{{ timestamp_field }}.month day=object.{{ timestamp_field }}.day pk=object.pk {% templatetag closeblock %}'>
                       Date Detail View
                     </a>
+                  {% templatetag openblock %} endif {% templatetag closeblock %}
+                  {% else %}
                   {% templatetag openblock %} endif {% templatetag closeblock %}
                   {% endif %}
                 </ul>

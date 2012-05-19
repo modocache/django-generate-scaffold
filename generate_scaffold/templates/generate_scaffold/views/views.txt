@@ -22,7 +22,7 @@ class {{ class_name }}View(object):
 
 
 {% if is_timestamped %}class {{ class_name }}DateView({{ class_name }}View):
-    date_field = 'created_at'
+    date_field = '{{ timestamp_field }}'
     month_format = '%m'
 
 

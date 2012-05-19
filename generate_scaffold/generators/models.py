@@ -30,7 +30,7 @@ class ModelsGenerator(BaseGenerator):
         field_key = self.get_field_key(field_key_alias)
         if not field_key:
             raise GeneratorError(
-                '{0} is not a recognized django.db.models.fields'
+                '{0} is not a recognized django.db.models.fields '
                 'type.'.format(field_key))
 
         if field_key in RELATIONSHIP_FIELDS and other_model is None:
@@ -89,4 +89,4 @@ class ModelsGenerator(BaseGenerator):
             'fields': rendered_fields,
             'is_timestamped_model': add_timestamp,
         }
-        return model_template.render(Context(c))
+        return model_template.render(Context(c)), class_name
