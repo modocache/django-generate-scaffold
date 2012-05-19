@@ -15,7 +15,7 @@ class Filelike(StringIO.StringIO):
         pass
 
     def read(self):
-        self.getvalue()
+        return self.getvalue()
 
 
 class FileModification(object):
