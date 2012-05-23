@@ -1,4 +1,4 @@
-from setuptools import setup
+from distutils.core import setup
 from generate_scaffold import get_version
 
 setup(
