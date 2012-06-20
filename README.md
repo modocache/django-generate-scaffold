@@ -1,4 +1,4 @@
-# django-generate-scaffold [![endorse](http://api.coderwall.com/modocache/endorsecount.png)](http://coderwall.com/modocache)
+# django-generate-scaffold
 
 Generate a Django model, views, URLconf, and templates using a single command.
 
