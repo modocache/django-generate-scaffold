@@ -1,1 +1,1 @@
-{{ field_name }} = models.FilePathField(path='uplaoded_files')
+{{ field_name }} = models.FilePathField(path='uploaded_files')
