@@ -8,6 +8,8 @@ from generate_scaffold.utils.directories import get_templates_in_dir
 
 class UrlsGenerator(BaseGenerator):
 
+    # FIXME - Accomodate for empty urls.py, without 
+    #         url imports.
     def render_urls(self, model, timestamp_fieldname=None):
         urls_module = self.get_app_module('urls')
         is_urlpatterns_available = \
