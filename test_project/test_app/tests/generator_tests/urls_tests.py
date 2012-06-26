@@ -4,6 +4,7 @@ from nose.tools import ok_, eq_, raises
 
 from generate_scaffold.generators import UrlsGenerator, GeneratorError
 from test_app.models import PreExistingModel, PreExistingDatedModel
+from test_urlgen_with_urlpatterns.models import URLPreExistingDatedModel
 
 
 TEST_APP_NAME = 'test_app'
@@ -143,7 +144,9 @@ urlpatterns = patterns('',
 
 
 def test_render_urls_with_urlpattern():
-    test_urlpattern = UrlsGenerator('test_urlgen_with_urlpatterns').render_urls(DATED_MODEL)
+    model = URLPreExistingDatedModel()
+    test_urlpattern = UrlsGenerator(
+        'test_urlgen_with_urlpatterns').render_urls(model)
     target_match = "urlpatterns += patterns"
 
-    ok_(re.match(target_match, test_urlpattern))
+    ok_(target_match in test_urlpattern)
