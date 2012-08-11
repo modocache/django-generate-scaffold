@@ -1,10 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    hashr (0.0.21)
+    travis-lint (1.4.0)
+      hashr (>= 0.0.19)
     watchr (0.7)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  travis-lint
   watchr (~> 0.7)
