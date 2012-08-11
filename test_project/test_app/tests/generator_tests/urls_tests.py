@@ -1,5 +1,3 @@
-import re
-
 from nose.tools import ok_, eq_, raises
 
 from generate_scaffold.generators import UrlsGenerator, GeneratorError
