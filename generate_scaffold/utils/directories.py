@@ -14,5 +14,5 @@ def get_templates_in_dir(dir_suffix):
         for root, _, files in os.walk(template_dir):
             public_files = [f for f in files if not f.startswith('.')]
 
-            for f  in public_files:
+            for f in sorted(public_files):
                 yield os.path.join(root, f)

@@ -1,7 +1,6 @@
 # Django settings for test_project project.
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-NOSE_ARGS = ['--with-sneazr']
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
