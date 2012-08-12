@@ -1,0 +1,161 @@
+Generated File. Do not edit.
+
+[HEADER]
+Version:0.15:$
+Arch:x86_64-gcc3:$
+
+[PLUGINS]
+googletalkbrowserplugin.plugin:$
+/Library/Internet Plug-Ins/googletalkbrowserplugin.plugin:$
+3.4.2.8800:$
+1344353341000:0:1:$
+Version 3.4.2.8800:$
+Google Talk NPAPI Plugin:$
+1
+0:application/googletalk:Google voice and video chat:googletalk:$
+npgtpo3dautoplugin.plugin:$
+/Library/Internet Plug-Ins/npgtpo3dautoplugin.plugin:$
+0.1.44.16:$
+1344349827000:0:1:$
+Google Talk Plugin Video Accelerator version:0.1.44.16:$
+Google Talk Plugin Video Accelerator:$
+1
+0:application/vnd.gtpo3d.auto:Google Talk Plugin Video Accelerator Type::$
+QuickTime Plugin.plugin:$
+/Library/Internet Plug-Ins/QuickTime Plugin.plugin:$
+7.7.1:$
+1343884638000:0:1:$
+The QuickTime Plugin allows you to view a wide variety of multimedia content in web pages. For more information, visit the <A HREF=http://www.apple.com/quicktime>QuickTime</A> Web site.:$
+QuickTime Plug-in 7.7.1:$
+43
+0:video/mp4:MPEG-4 media:mp4:$
+1:audio/x-ac3:AC3 audio:ac3:$
+2:video/x-m4v:Video:m4v:$
+3:application/x-sdp:SDP stream descriptor:sdp:$
+4:audio/AMR:AMR audio:AMR:$
+5:video/x-flv:Flash Video:flv:$
+6:application/x-rtsp:RTSP stream descriptor:rtsp,rts:$
+7:video/3gpp2:3GPP2 media:3g2,3gp2:$
+8:audio/mpeg:MPEG audio:mpeg,mpg,m1s,m1a,mp2,mpm,mpa,m2a,mp3,swa:$
+9:video/x-nuv:NuppelVideo:nuv:$
+10:audio/mpeg3:MP3 audio:mp3,swa:$
+11:application/sdp:SDP stream descriptor:sdp:$
+12:application/x-mpeg:AMC media:amc:$
+13:video/x-msvideo:Video For Windows:avi,vfw,vfw,avi,gvi,divx,vp6:$
+14:video/mpeg:MPEG media:mpeg,mpg,m1s,m1v,m1a,m75,m15,mp2,mpm,mpv,mpa:$
+15:audio/aac:AAC audio:aac,adts:$
+16:video/sd-video:SD video:sdv:$
+17:audio/x-gsm:GSM audio:gsm:$
+18:audio/x-caf:CAF audio:caf:$
+19:audio/3gpp:3GPP media:3gp,3gpp:$
+20:audio/mp3:MP3 audio:mp3,swa:$
+21:video/avi:Video For Windows:avi,vfw,vfw,avi,gvi,divx,vp6:$
+22:audio/mp4:MPEG-4 media:mp4:$
+23:audio/x-aiff:AIFF audio:aiff,aif,aifc,cdda:$
+24:video/x-mpeg:MPEG media:mpeg,mpg,m1s,m1v,m1a,m75,m15,mp2,mpm,mpv,mpa:$
+25:video/3gpp:3GPP media:3gp,3gpp:$
+26:audio/x-mpeg:MPEG audio:mpeg,mpg,m1s,m1a,mp2,mpm,mpa,m2a,mp3,swa:$
+27:audio/x-aac:AAC audio:aac,adts:$
+28:audio/3gpp2:3GPP2 media:3g2,3gp2:$
+29:audio/x-wav:WAVE audio:wav,bwf:$
+30:video/quicktime:QuickTime Movie:mov,qt,mqv:$
+31:audio/x-mp3:MP3 audio:mp3,swa:$
+32:audio/x-mpeg3:MP3 audio:mp3,swa:$
+33:audio/x-m4a:AAC audio:m4a:$
+34:audio/ac3:AC3 audio:ac3:$
+35:audio/x-m4p:AAC audio:m4p:$
+36:audio/x-tta:True Audio:tta:$
+37:audio/x-m4b:AAC audio book:m4b:$
+38:audio/aiff:AIFF audio:aiff,aif,aifc,cdda:$
+39:video/msvideo:Video For Windows:avi,vfw,vfw,avi,gvi,divx,vp6:$
+40:audio/basic:uLaw/AU audio:au,snd,ulw:$
+41:audio/wav:WAVE audio:wav,bwf:$
+42:audio/vnd.qcelp:QUALCOMM PureVoice audio:qcp,qcp:$
+SharePointBrowserPlugin.plugin:$
+/Library/Internet Plug-Ins/SharePointBrowserPlugin.plugin:$
+14.2.3:$
+1339830000000:0:1:$
+Microsoft Office for Mac SharePoint Browser Plug-in:$
+SharePoint Browser Plug-in:$
+1
+0:application/x-sharepoint:Microsoft Office for Mac SharePoint Browser Plug-in::$
+JavaAppletPlugin.plugin:$
+/System/Library/Java/Support/CoreDeploy.bundle/Contents/JavaAppletPlugin.plugin:$
+14.3.0:$
+1338841022000:0:1:$
+Displays Java applet content, or a placeholder if Java is not installed.:$
+Java Applet Plug-in:$
+17
+0:application/x-java-applet;version=1.1.3:Java applet::$
+1:application/x-java-applet:Basic Java Applets:javaapplet:$
+2:application/x-java-applet;jpi-version=1.6.0_33:Java applet::$
+3:application/x-java-applet;version=1.2.2:Java applet::$
+4:application/x-java-applet;version=1.5:Java applet::$
+5:application/x-java-applet;version=1.3.1:Java applet::$
+6:application/x-java-applet;version=1.3:Java applet::$
+7:application/x-java-vm:Java applet::$
+8:application/x-java-applet;version=1.1.2:Java applet::$
+9:application/x-java-applet;version=1.1:Java applet::$
+10:application/x-java-applet;version=1.2.1:Java applet::$
+11:application/x-java-applet;version=1.6:Java applet::$
+12:application/x-java-applet;version=1.4.2:Java applet::$
+13:application/x-java-applet;version=1.4:Java applet::$
+14:application/x-java-applet;version=1.1.1:Java applet::$
+15:application/x-java-applet;version=1.2:Java applet::$
+16:application/x-java-vm-npruntime:::$
+Silverlight.plugin:$
+/Library/Internet Plug-Ins/Silverlight.plugin:$
+5.1.10411.0:$
+1334127450000:0:1:$
+5.1.10411.0:$
+Silverlight Plug-In:$
+2
+0:application/x-silverlight:Microsoft Silverlight:xaml:$
+1:application/x-silverlight-2:Microsoft Silverlight:xaml:$
+LogMeIn.plugin:$
+/Library/Internet Plug-Ins/LogMeIn.plugin:$
+1.0.530:$
+1294701146000:0:1:$
+LogMeIn remote control components:$
+LogMeIn Plugin 1.0.0.530:$
+4
+0:application/x-3amlabs-rafiletransfer:File Transfer::$
+1:application/x-3amlabs-raversion:Version::$
+2:application/x-3amlabs-raremotecontrol:Remote Control::$
+3:application/x-3amlabs-raperfview:Performance Viewer::$
+DivXBrowserPlugin.plugin:$
+/Library/Internet Plug-Ins/DivXBrowserPlugin.plugin:$
+2.0:$
+1278528178000:0:1:$
+DivX Web Player version 2.0.2.39:$
+DivX Web Player:$
+1
+0:video/divx:DivX Video File:divx,div:$
+iPhotoPhotocast.plugin:$
+/Library/Internet Plug-Ins/iPhotoPhotocast.plugin:$
+7.0:$
+1249043146000:0:1:$
+iPhoto6:$
+iPhotoPhotocast:$
+1
+0:application/photo:iPhoto 700::$
+
+[INVALID]
+/Library/Internet Plug-Ins/SharePointWebKitPlugin.webplugin:$
+1339830000000:$
+/Library/Internet Plug-Ins/Quartz Composer.webplugin:$
+1343884644000:$
+/Library/Internet Plug-Ins/nsIQTScriptablePlugin.xpt:$
+1343884638000:$
+/Library/Internet Plug-Ins/npdivx.xpt:$
+1278528180000:$
+/Library/Internet Plug-Ins/npContributeMac.bundle:$
+1328451988000:$
+/Library/Internet Plug-Ins/LogMeInSafari64.plugin:$
+1294701146000:$
+/Library/Internet Plug-Ins/LogMeInSafari32.plugin:$
+1294701146000:$
+/Library/Internet Plug-Ins/flashplayer.xpt:$
+1280414676000:$
+/Users/bgesiak/Library/Internet Plug-Ins/WebEx.plugin:$
+1340042501000:$
