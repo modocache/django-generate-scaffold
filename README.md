@@ -2,10 +2,12 @@
 
 Generate a Django model, views, URLconf, and templates using a single command.
 
+
 ## Quickstart
 
 A screencast introducing `django-generate-scaffold` is
 available [here](http://vimeo.com/42399125).
+
 
 ## Usage
 
@@ -69,11 +71,19 @@ In order to run the test suite, start a Selenium server and issue the following 
 Consult `.travis.yml` for the exact steps necessary to run the test
 suite.
 
+#### Autotesting via watchr
+
+By installing the gems in the Gemfile, you can automatically run all non-Selenium
+based tests every time a file is modified:
+
+        watchr autotest.rb
+
 ### How to Contribute
 
 - Propose new features or report bugs by creating an issue on Github.
 - Add new features, tests, or fix stuff and issue a pull request.
 - Create a better, more eloquent screencast with less stammering.
+
 
 ## Issues
 

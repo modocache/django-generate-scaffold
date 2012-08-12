@@ -32,7 +32,7 @@ def runtests():
         subprocess.call('cp -r {} {}.orig'.format(tpls_abspath, tpls_abspath), shell=True)
 
     subprocess.call('python manage.py generatescaffold test_app GeneratedModel title:string description:text', shell=True)
-    test_status = subprocess.call('python manage.py test --with-selenium --with-cherrypyliveserver --noinput', shell=True)
+    test_status = subprocess.call('python manage.py test --with-selenium --with-selenium-fixtures --with-cherrypyliveserver --noinput', shell=True)
 
     if models_exists:
         subprocess.call('mv {}.orig {}'.format(models_abspath, models_abspath), shell=True)
