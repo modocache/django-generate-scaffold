@@ -1,0 +1,12 @@
+[
+    {
+        "pk": 1,
+        "model": "test_app.generatedmodel",
+        "fields": {
+            "title": "Generated Model Fixture",
+            "description": "Find me in test_project/test_app/fixtures/test_generated_model.json",
+            "created_at": "2012-08-11T21:23:33.847Z",
+            "updated_at": "2012-08-11T21:23:33.847Z"
+        }
+    }
+]
