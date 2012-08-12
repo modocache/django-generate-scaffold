@@ -1,5 +1,10 @@
 language: python
 python:
   - "2.7"
+before_install:
+  - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.25.0.jar"
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - "java -jar selenium-server-standalone-2.25.0.jar -firefoxProfileTemplate 'test_project/test_app/tests/functional_tests/jc15bh8e.Selenium' &"
 install: "pip install -r requirements.txt --use-mirrors"
-script: python setup.py install --force && cd test_project && python manage.py test
+script: python setup.py install --force && cd test_project && python test_app/tests/runtests.py

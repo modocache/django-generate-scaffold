@@ -58,15 +58,24 @@ issues when rendering templates.
 ## Development
 
 `django-generate-scaffold` is currently in ALPHA.
-Everything works, but tests are not available at this time.
+
+### Running Tests
+
+In order to run the test suite, start a Selenium server and issue the following commands:
+
+        cd django-generate-scaffold/test_project
+        python test_app/tests/runtests.py
+
+Consult `.travis.yml` for the exact steps necessary to run the test
+suite.
+
+### How to Contribute
+
+- Propose new features or report bugs by creating an issue on Github.
+- Add new features, tests, or fix stuff and issue a pull request.
+- Create a better, more eloquent screencast with less stammering.
 
 ## Issues
 
 If you experience any issues, please
 [create an issue on Github](https://github.com/modocache/django-generate-scaffold/issues).
-
-## How to Contribute
-
-- Propose new features or report bugs by creating an issue on Github.
-- Add new features, tests, or fix stuff and issue a pull request.
-- Create a better, more eloquent screencast with less stammering.
