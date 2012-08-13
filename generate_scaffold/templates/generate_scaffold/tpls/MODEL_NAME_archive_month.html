@@ -43,7 +43,7 @@
     {% templatetag openblock %} for date in date_list {% templatetag closeblock %}
       <li>
         <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_day_archive year=date.year month=date.month day=date.day {% templatetag closeblock %}'>
-          {% templatetag openvariable %} date {% templatetag closevariable %}
+          {% templatetag openvariable %} date|date:"M. d, Y" {% templatetag closevariable %}
         </a>
       </li>
     {% templatetag openblock %} endfor {% templatetag closeblock %}
