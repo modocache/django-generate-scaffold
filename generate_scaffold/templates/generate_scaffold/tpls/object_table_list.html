@@ -1,5 +1,7 @@
+{% templatetag openblock %} load i18n {% templatetag closeblock %}
+
 <p>
-  Click on the primary key value to access the individual {{ class_name }}'s page.
+  {% templatetag openblock %} trans "Click on the primary key value to access the individual {{ class_name }}'s page." {% templatetag closeblock %}
 </p>
 <table class='table table-bordered table-striped'>
   <thead>
