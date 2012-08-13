@@ -1,18 +1,21 @@
 {% templatetag openblock %} extends '{{ app_name }}/{{ model_slug }}/base.html' {% templatetag closeblock %}
+
+{% templatetag openblock %} load i18n {% templatetag closeblock %}
+
 {% templatetag openblock %} block filename {% templatetag closeblock %}
   {{ filename }}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 {% templatetag openblock %} block header-link {% templatetag closeblock %}
   <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_list {% templatetag closeblock %}'>
-    {{ class_name }} List
+    {% templatetag openblock %} trans "{{ class_name }} List" {% templatetag closeblock %}
   </a>
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 {% templatetag openblock %} block header-description {% templatetag closeblock %}
-  A page representing a list of objects.
+  {% templatetag openblock %} trans "A page representing a list of objects." {% templatetag closeblock %}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 {% templatetag openblock %} block content {% templatetag closeblock %}
   <h2>
-    {{ class_name }}s
+    {% templatetag openblock %} trans "{{ class_name }}s" {% templatetag closeblock %}
   </h2>
   {% templatetag openblock %} include '{{ app_name }}/{{ model_slug }}/object_table_list.html' {% templatetag closeblock %}
   {% templatetag openblock %} include '{{ app_name }}/{{ model_slug }}/pagination.html' {% templatetag closeblock %}

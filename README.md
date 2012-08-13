@@ -63,10 +63,13 @@ issues when rendering templates.
 
 ### Running Tests
 
-In order to run the test suite, start a Selenium server and issue the following commands:
+In order to run the test suite, install your local version of `django-generate-scaffold`
+and start a Selenium server and issue the following commands:
 
-        cd django-generate-scaffold/test_project
-        python test_app/tests/runtests.py
+        $ cd django-generate-scaffold
+        $ python setup.py install --force
+        $ cd test_project
+        $ python test_app/tests/runtests.py
 
 Consult `.travis.yml` for the exact steps necessary to run the test
 suite.
@@ -76,7 +79,7 @@ suite.
 By installing the gems in the Gemfile, you can automatically run all non-Selenium
 based tests every time a file is modified:
 
-        watchr autotest.rb
+        $ watchr autotest.rb
 
 ### How to Contribute
 
