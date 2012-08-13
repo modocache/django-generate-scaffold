@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% templatetag openblock %} extends '{{ app_name }}/{{ model_slug }}/base.html' {% templatetag closeblock %}
 
 {% templatetag openblock %} load i18n {% templatetag closeblock %}
@@ -5,9 +7,11 @@
 {% templatetag openblock %} block filename {% templatetag closeblock %}
   {{ filename }}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
+
 {% templatetag openblock %} block title {% templatetag closeblock %}
-  {% templatetag openblock %} trans "{{ class_name }} Detail" {% templatetag closeblock %}
+  {% templatetag openblock %} trans "{% blocktrans %}{{ class_name }} Detail{% endblocktrans %}" {% templatetag closeblock %}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
+
 {% if is_timestamped %}
 {% templatetag openblock %} block breadcrumbs {% templatetag closeblock %}
   <ul class='breadcrumb'>
@@ -51,14 +55,17 @@
   </ul>
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 {% endif %}
+
 {% templatetag openblock %} block header-link {% templatetag closeblock %}
   <a href='{% templatetag openvariable %} object.get_absolute_url {% templatetag closevariable %}'>
-    {% templatetag openblock %} trans "{{ class_name }} Detail" {% templatetag closeblock %}
+    {% templatetag openblock %} trans "{% blocktrans %}{{ class_name }} Detail{% endblocktrans %}" {% templatetag closeblock %}
   </a>
 {% templatetag openblock %} endblock {% templatetag closeblock %}
+
 {% templatetag openblock %} block header-description {% templatetag closeblock %}
-  {% templatetag openblock %} trans "A page representing an individual object." {% templatetag closeblock %}
+  {% templatetag openblock %} trans "{% trans "A page representing an individual object." %}" {% templatetag closeblock %}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
+
 {% templatetag openblock %} block content {% templatetag closeblock %}
   {% templatetag openblock %} include '{{ app_name }}/{{ model_slug }}/object_table_detail.html' {% templatetag closeblock %}
   <form action='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_delete pk=object.pk {% templatetag closeblock %}' charset='utf-8' method='post'>
@@ -69,7 +76,7 @@
           {% templatetag openblock %} trans "Update" {% templatetag closeblock %}
         </a>
         <button class='btn btn-danger' type='submit'>
-          {% templatetag openblock %} trans "Delete" {% templatetag closeblock %}
+          {% templatetag openblock %} trans "{% trans "Delete" %}" {% templatetag closeblock %}
         </button>
       </div>
     </fieldset>

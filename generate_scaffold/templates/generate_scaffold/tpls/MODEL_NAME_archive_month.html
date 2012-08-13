@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% templatetag openblock %} extends '{{ app_name }}/{{ model_slug }}/base.html' {% templatetag closeblock %}
 
 {% templatetag openblock %} load i18n {% templatetag closeblock %}
@@ -17,7 +19,7 @@
     </li>
     <li>
       <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_year_archive year=month.year {% templatetag closeblock %}'>
-        {% templatetag openblock %} trans "Year Archive" {% templatetag closeblock %}
+        {% templatetag openblock %} trans "{% trans "Year Archive" %}" {% templatetag closeblock %}
       </a>
       <span class='divider'>
         /
@@ -25,18 +27,18 @@
     </li>
     <li>
       <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_month_archive year=month.year month=month.month {% templatetag closeblock %}'>
-        {% templatetag openblock %} trans "Month Archive" {% templatetag closeblock %}
+        {% templatetag openblock %} trans "{% trans "Month Archive" %}" {% templatetag closeblock %}
       </a>
     </li>
   </ul>
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 {% templatetag openblock %} block header-link {% templatetag closeblock %}
   <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_month_archive year=month.year month=month.month {% templatetag closeblock %}'>
-    {% templatetag openblock %} trans "{{ class_name }} Month Archive" {% templatetag closeblock %}
+    {% templatetag openblock %} trans "{% blocktrans %}{{ class_name }} Month Archive{% endblocktrans %}" {% templatetag closeblock %}
   </a>
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 {% templatetag openblock %} block header-description {% templatetag closeblock %}
-  {% templatetag openblock %} trans "A monthly archive page showing all objects in a given month." {% templatetag closeblock %}
+  {% templatetag openblock %} trans "{% trans "A monthly archive page showing all objects in a given month." %}" {% templatetag closeblock %}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 {% templatetag openblock %} block content {% templatetag closeblock %}
   <h2>
@@ -53,7 +55,7 @@
   </ul>
   <h2>
     {% templatetag openblock %} blocktrans {% templatetag closeblock %}
-      {{ class_name }}s created in the month of {% templatetag openvariable %} month|date:"M Y" {% templatetag closevariable %}
+      {% blocktrans %}{{ class_name }}s created in the month of {% endblocktrans %}{% templatetag openvariable %} month|date:"M Y" {% templatetag closevariable %}
     {% templatetag openblock %} endblocktrans {% templatetag closeblock %}
   </h2>
   {% templatetag openblock %} include '{{ app_name }}/{{ model_slug }}/object_table_list.html' {% templatetag closeblock %}
