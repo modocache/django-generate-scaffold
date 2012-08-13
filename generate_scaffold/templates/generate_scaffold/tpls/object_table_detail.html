@@ -1,13 +1,15 @@
+{% load i18n %}
+
 {% templatetag openblock %} load i18n {% templatetag closeblock %}
 
 <table class='table table-bordered table-striped'>
   <thead>
     <tr>
       <th>
-        {% templatetag openblock %} trans "Field" {% templatetag closeblock %}
+        {% templatetag openblock %} trans "{% trans "Field" %}" {% templatetag closeblock %}
       </th>
       <th>
-        {% templatetag openblock %} trans "Value" {% templatetag closeblock %}
+        {% templatetag openblock %} trans "{% trans "Value" %}" {% templatetag closeblock %}
       </th>
     </tr>
   </thead>

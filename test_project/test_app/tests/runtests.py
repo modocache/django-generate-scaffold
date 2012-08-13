@@ -1,10 +1,25 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 
+import fileinput
 import os
+from os.path import dirname
 import sys
 import subprocess
 import time
+
+
+PROJECT_SETTINGS_ABSPATH = os.path.join(
+    dirname(dirname(dirname(__file__))), 'test_project', 'settings.py')
+
+
+def overwrite_project_language(lang_code):
+    for line in fileinput.input(PROJECT_SETTINGS_ABSPATH, inplace=1):
+        if line.startswith('LANGUAGE_CODE ='):
+            print('LANGUAGE_CODE = \'{}\''.format(lang_code))
+        else:
+            print(line.strip('\n'))
 
 
 def runtests():
@@ -32,9 +47,17 @@ def runtests():
     if tpls_exists:
         subprocess.call('cp -r {} {}.orig'.format(tpls_abspath, tpls_abspath), shell=True)
 
+    overwrite_project_language('ja')
+    subprocess.call('python manage.py generatescaffold test_app I18nModel title:string', shell=True)
+    time.sleep(1)
+    overwrite_project_language('en-us')
+    time.sleep(1)
+
     subprocess.call('python manage.py generatescaffold test_app GeneratedNoTimestampModel title:string description:text --no-timestamps', shell=True)
     time.sleep(2) # Give time for Django's AppCache to clear
+
     subprocess.call('python manage.py generatescaffold test_app GeneratedModel title:string description:text', shell=True)
+
     test_status = subprocess.call('python manage.py test --with-selenium --with-selenium-fixtures --with-cherrypyliveserver --noinput', shell=True)
 
     if models_exists:
