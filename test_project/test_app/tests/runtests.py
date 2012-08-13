@@ -4,6 +4,7 @@
 import os
 import sys
 import subprocess
+import time
 
 
 def runtests():
@@ -31,6 +32,8 @@ def runtests():
     if tpls_exists:
         subprocess.call('cp -r {} {}.orig'.format(tpls_abspath, tpls_abspath), shell=True)
 
+    subprocess.call('python manage.py generatescaffold test_app GeneratedNoTimestampModel title:string description:text --no-timestamps', shell=True)
+    time.sleep(2) # Give time for Django's AppCache to clear
     subprocess.call('python manage.py generatescaffold test_app GeneratedModel title:string description:text', shell=True)
     test_status = subprocess.call('python manage.py test --with-selenium --with-selenium-fixtures --with-cherrypyliveserver --noinput', shell=True)
 
