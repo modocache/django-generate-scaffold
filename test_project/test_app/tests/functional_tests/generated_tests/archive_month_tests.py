@@ -13,8 +13,6 @@ class ArchiveMonthTest(unittest.TestCase, SeleniumTestCaseMixin):
     def test_ok(self):
         s = self.selenium
         self.failUnless(s.is_text_present('GeneratedModel Month Archive'))
-        self.failUnless(s.is_text_present(
-            'GeneratedModels created in the month of Aug 2012'))
         self.failUnless(s.is_text_present('Generated Model Fixture'))
 
     # FIXME
