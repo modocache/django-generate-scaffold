@@ -1,30 +1,33 @@
 {% templatetag openblock %} extends '{{ app_name }}/{{ model_slug }}/base.html' {% templatetag closeblock %}
+
+{% templatetag openblock %} load i18n {% templatetag closeblock %}
+
 {% templatetag openblock %} block filename {% templatetag closeblock %}
   {{ filename }}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 {% templatetag openblock %} block title {% templatetag closeblock %}
   {% templatetag openblock %} if object {% templatetag closeblock %}
-    Update {{ class_name }}
+    {% templatetag openblock %} trans "Update {{ class_name }}" {% templatetag closeblock %}
   {% templatetag openblock %} else {% templatetag closeblock %}
-    Create a New {{ class_name }}
+    {% templatetag openblock %} trans "Create a New {{ class_name }}" {% templatetag closeblock %}
   {% templatetag openblock %} endif {% templatetag closeblock %}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 {% templatetag openblock %} block header-link {% templatetag closeblock %}
   {% templatetag openblock %} if object {% templatetag closeblock %}
     <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_update pk=object.pk {% templatetag closeblock %}'>
-      {{ class_name }} Update
+      {% templatetag openblock %} trans "{{ class_name }} Update" {% templatetag closeblock %}
     </a>
   {% templatetag openblock %} else {% templatetag closeblock %}
     <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_create {% templatetag closeblock %}'>
-      {{ class_name }} Create
+      {% templatetag openblock %} trans "{{ class_name }} Create" {% templatetag closeblock %}
     </a>
   {% templatetag openblock %} endif {% templatetag closeblock %}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 {% templatetag openblock %} block header-description {% templatetag closeblock %}
   {% templatetag openblock %} if object {% templatetag closeblock %}
-    A view that displays a form for editing an existing object.
+    {% templatetag openblock %} trans "A view that displays a form for editing an existing object." {% templatetag closeblock %}
   {% templatetag openblock %} else {% templatetag closeblock %}
-    A view that displays a form for creating an object.
+    {% templatetag openblock %} trans "A view that displays a form for creating an object." {% templatetag closeblock %}
   {% templatetag openblock %} endif {% templatetag closeblock %}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 {% templatetag openblock %} block content {% templatetag closeblock %}
@@ -35,9 +38,9 @@
       <div class='form-actions'>
         <button class='btn btn-large btn-success' type='submit'>
           {% templatetag openblock %} if object {% templatetag closeblock %}
-            Update
+            {% templatetag openblock %} trans "Update" {% templatetag closeblock %}
           {% templatetag openblock %} else {% templatetag closeblock %}
-            Create
+            {% templatetag openblock %} trans "Create" {% templatetag closeblock %}
           {% templatetag openblock %} endif {% templatetag closeblock %}
         </button>
       </div>

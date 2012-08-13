@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+  {% templatetag openblock %} load i18n {% templatetag closeblock %}
   <head>
-    <title>{% templatetag openblock %} block title {% templatetag closeblock %}Django Scaffold{% templatetag openblock %} endblock {% templatetag closeblock %}</title>
+    <title>{% templatetag openblock %} block title {% templatetag closeblock %}{% templatetag openblock %} trans "Django Scaffold" {% templatetag closeblock %}{% templatetag openblock %} endblock {% templatetag closeblock %}</title>
     <style type="text/css" media="screen">
       /*!
        * Bootstrap v2.0.3
@@ -659,47 +660,47 @@
             {% templatetag openblock %} block sidebar {% templatetag closeblock %}
                 <ul class='nav nav-list'>
                   <li class='nav-header'>
-                    Views
+                    {% templatetag openblock %} trans "Views" {% templatetag closeblock %}
                   </li>
                   <li>
                     <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_list {% templatetag closeblock %}'>
-                      List View
+                      {% templatetag openblock %} trans "List View" {% templatetag closeblock %}
                     </a>
                   </li>
                   <li>
                     <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_create {% templatetag closeblock %}'>
-                      Create View
+                      {% templatetag openblock %} trans "Create View" {% templatetag closeblock %}
                     </a>
                   </li>
                   {% templatetag openblock %} if object {% templatetag closeblock %}
                     <li>
                       <a href='{% templatetag openvariable %} object.get_absolute_url {% templatetag closevariable %}'>
-                        Detail View
+                        {% templatetag openblock %} trans "Detail View" {% templatetag closeblock %}
                       </a>
                     </li>
                     <li>
                       <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_update pk=object.pk {% templatetag closeblock %}'>
-                        Update View
+                        {% templatetag openblock %} trans "Update View" {% templatetag closeblock %}
                       </a>
                     </li>
                     <li>
                       <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_delete pk=object.pk {% templatetag closeblock %}'>
-                        Delete View
+                        {% templatetag openblock %} trans "Delete View" {% templatetag closeblock %}
                       </a>
                     </li>
                   {% if is_timestamped %}
                   {% templatetag openblock %} endif {% templatetag closeblock %}
                   <li class='nav-header'>
-                    Date-based Views
+                    {% templatetag openblock %} trans "Date-based Views" {% templatetag closeblock %}
                   </li>
                   <li>
                     <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_archive_index {% templatetag closeblock %}'>
-                      Archive Index
+                      {% templatetag openblock %} trans "Archive Index" {% templatetag closeblock %}
                     </a>
                   </li>
                   {% templatetag openblock %} if object {% templatetag closeblock %}
                     <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_date_detail year=object.{{ timestamp_field }}.year month=object.{{ timestamp_field }}.month day=object.{{ timestamp_field }}.day pk=object.pk {% templatetag closeblock %}'>
-                      Date Detail View
+                      {% templatetag openblock %} trans "Date Detail View" {% templatetag closeblock %}
                     </a>
                   {% templatetag openblock %} endif {% templatetag closeblock %}
                   {% else %}
@@ -731,9 +732,9 @@
       </div>
       <hr>
       <footer>
-        Presented to you by <a href='http://github.com/modocache/django-generate-scaffold'>django-generate-scaffold</a>.
+        {% templatetag openblock %} trans "Presented to you by <a href='http://github.com/modocache/django-generate-scaffold'>django-generate-scaffold</a>." {% templatetag closeblock %}
         <br>
-        Edit this template file in <code>{% templatetag openblock %} block filename {% templatetag closeblock %}the templates directory!{% templatetag openblock %} endblock {% templatetag closeblock %}</code>
+        {% templatetag openblock %} trans "Edit this template file in:" {% templatetag closeblock %} <code>{% templatetag openblock %} block filename {% templatetag closeblock %}the templates directory!{% templatetag openblock %} endblock {% templatetag closeblock %}</code>
       </footer>
     </div>
   </body>
