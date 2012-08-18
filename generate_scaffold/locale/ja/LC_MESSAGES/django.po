@@ -1,0 +1,336 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-08-12 23:28-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+#: management/commands/generatescaffold.py:38
+msgid ""
+"Do not actually do anything, but print what would have happened to the "
+"console."
+msgstr "実際の処理は行わずに、そのままコンソールに出力する"
+
+#: management/commands/generatescaffold.py:43
+msgid "An existing model to generate views/templates for."
+msgstr "既存のモデルを指定してビュー、テンプレートを生成する"
+
+#: management/commands/generatescaffold.py:47
+msgid ""
+"The name of the field used as a timestamp for date-based views. This option "
+"may only be used when passing a model via the `--model` option."
+msgstr "日付ベースの汎用ビューを生成する際に使われるフィールドを指定する"
+
+#: management/commands/generatescaffold.py:55
+msgid ""
+"Do not automatically append created_at and updated_at DateTimeFields to "
+"generated models."
+msgstr "created_at（オブジェクトが作成された時刻）とupdated_at（更新された時刻）を追加しない"
+
+#: management/commands/generatescaffold.py:80
+msgid "The --timestamp-field option can only be used if --model is specified."
+msgstr "--timestamp-fieldは--modelを指定しないと使えません。"
+
+#: management/commands/generatescaffold.py:90
+msgid ""
+"You must add {0} to your INSTALLED_APPS in order for {1} to generate "
+"templates."
+msgstr "{0}をINSTALLED_APPSに追加しないと{1}はモデルを生成することができません。"
+
+#: management/commands/generatescaffold.py:98
+msgid "Could not import app with name: {0}"
+msgstr "{0}というアプリのインポートに失敗しました。"
+
+#: management/commands/generatescaffold.py:107
+msgid "You must provide a model_name."
+msgstr "model_nameを指定しないといけません。"
+
+#: management/commands/generatescaffold.py:119
+msgid "{0} already exists."
+msgstr "{0}は既に存在します。"
+
+#: management/commands/generatescaffold.py:131
+msgid "Cannot generate model with no fields."
+msgstr "フィールドのないモデルは生成できません。"
+
+#: management/commands/generatescaffold.py:135
+msgid "No field type specified for model field: {0}"
+msgstr "{0}というフィールドの種別を指定しないといけません。"
+
+#: management/commands/generatescaffold.py:145
+msgid ""
+"Could not generate model.\n"
+"{0}"
+msgstr "モデルの生成に失敗しました。\n{0}"
+
+#: management/commands/generatescaffold.py:150
+msgid ""
+"It appears you don't have a valid URLconf in your {app_name} app. Please "
+"create a valid urls.py file and try again.\n"
+"Alternatively, you can try again without appending --dry-run to this "
+"command, in which case {cmd_name} will make a valid URLconf for you."
+msgstr ""
+"{app_name}アプリのURLディスパッチャ（URLconf）のインポートに失敗しました。"
+"インポート可能なurls.pyファイルを作成して、再度実行してください。\n"
+"また、--dry-runを指定せずに実行すると、urls.pyは{cmd_name}により自動的に生成されます。"
+
+#: management/commands/generatescaffold.py:199
+msgid "Something when wrong when generating model {0}"
+msgstr "{0}というモデルの生成に失敗しました。"
+
+#: management/commands/generatescaffold.py:210
+msgid ""
+"Could not create file: {0}\n"
+"Please remove the directory at that location and try again."
+msgstr "次のファイルの生成に失敗しました：{0}\n"
+"同じパスに存在しているディレクトリを削除し、再度実行してください。"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive.html:17
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_day.html:17
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_year.html:15
+#: templates/generate_scaffold/tpls/base.html:704
+msgid "Archive Index"
+msgstr "アーカイブ・トップ"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive.html:24
+#, python-format
+msgid "%(class_name)s Archive Index"
+msgstr "%(class_name)sアーカイブ・トップ"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive.html:28
+msgid "A top-level index page showing the latest objects, by date."
+msgstr "新着オブジェクトを日付順で表示するトップレベルのインデクスペー ジです。"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive.html:44
+#, python-format
+msgid "Recent %(class_name)ss"
+msgstr "新着%(class_name)s"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_day.html:11
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_day.html:48
+#, python-format
+msgid "%(class_name)s Day Archive"
+msgstr "%(class_name)s日ごとアーカイブ"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_day.html:25
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_month.html:22
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_year.html:23
+msgid "Year Archive"
+msgstr "年ごとアーカイブ"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_day.html:33
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_month.html:30
+msgid "Month Archive"
+msgstr "月ごとアーカイブ"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_day.html:41
+msgid "Day Archive"
+msgstr "日ごとアーカイブ"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_day.html:52
+msgid "A day archive page showing all objects in a given day."
+msgstr "指定日の全てのオブジェクトのリストを表示する、日ごとのアーカイブページです。"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_day.html:57
+#, python-format
+msgid "%(class_name)ss created on "
+msgstr "この日付に作成された%(class_name)s："
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_month.html:37
+#, python-format
+msgid "%(class_name)s Month Archive"
+msgstr "%(class_name)sの月ごとアーカイブ"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_month.html:41
+msgid "A monthly archive page showing all objects in a given month."
+msgstr "指定月の全てのオブジェクトのリストを表示する、月ごとのアーカイブページです。"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_month.html:58
+#, python-format
+msgid "%(class_name)ss created in the month of "
+msgstr "この月に作成された%(class_name)s："
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_week.html:12
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_week.html:16
+#, python-format
+msgid "%(class_name)s Week Archive"
+msgstr "%(class_name)sの週ごとアーカイブ"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_week.html:20
+msgid "A weekly archive page showing all objects in a given week."
+msgstr "指定週の全てのオブジェクトのリストを表示する、週ごとのアーカイブページです。"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_week.html:26
+#, python-format
+msgid "%(class_name)ss created during the week beginning on "
+msgstr "この1週間で作成された%(class_name)s："
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_year.html:31
+#, python-format
+msgid "%(class_name)s Year Archive"
+msgstr "%(class_name)sの年ごとアーカイブ"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_year.html:35
+msgid "A yearly archive page showing all available months in a given year."
+msgstr "指定年でオブジェクトのある月のリストを表示する、年ごとのアーカイブページです。"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_archive_year.html:52
+#, python-format
+msgid "%(class_name)ss created in the year "
+msgstr "この1年で作られた%(class_name)s："
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_confirm_delete.html:12
+#: templates/generate_scaffold/tpls/MODEL_NAME_confirm_delete.html:17
+#, python-format
+msgid "%(class_name)s Confirm Delete"
+msgstr "%(class_name)sの削除確認"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_confirm_delete.html:22
+msgid ""
+"A view that displays a confirmation page (on GET) and deletes an existing "
+"object (on POST)."
+msgstr "既存のオブジェクトを削除するための確認ページを表示し、オブジェクトを削除するためのページです。オブジェクトを削除するのはリクエストメソッドがPOSTであった場合だけです。このビューをGETで取得すると、同じURLに対してPOSTを行うような確認ページを表示します。"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_confirm_delete.html:27
+#, python-format
+msgid "Delete this %(class_name)s?"
+msgstr "この%(class_name)sを削除しますか？"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_confirm_delete.html:36
+#: templates/generate_scaffold/tpls/MODEL_NAME_detail.html:79
+msgid "Delete"
+msgstr "削除"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_detail.html:12
+#: templates/generate_scaffold/tpls/MODEL_NAME_detail.html:61
+#, python-format
+msgid "%(class_name)s Detail"
+msgstr "%(class_name)sの詳細"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_detail.html:66
+msgid "A page representing an individual object."
+msgstr "個々のオブジェクトを表現するページです。"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_form.html:13
+#, python-format
+msgid "Update %(class_name)s"
+msgstr "%(class_name)s更新"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_form.html:15
+#, python-format
+msgid "Create a New %(class_name)s"
+msgstr "%(class_name)s作成"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_form.html:22
+#, python-format
+msgid "%(class_name)s Update"
+msgstr "%(class_name)s更新"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_form.html:26
+#, python-format
+msgid "%(class_name)s Create"
+msgstr "%(class_name)s作成"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_form.html:33
+msgid "A view that displays a form for editing an existing object."
+msgstr "オブジェクト更新のためのフォームを表示し、オブジェクトを保存するためのページです。"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_form.html:35
+msgid "A view that displays a form for creating an object."
+msgstr "オブジェクト作成のためのフォームを表示し、オブジェクトを保存するためのページです。"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_form.html:47
+msgid "Update"
+msgstr "更新"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_form.html:49
+msgid "Create"
+msgstr "作成"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_list.html:13
+#, python-format
+msgid "%(class_name)s List"
+msgstr "%(class_name)s一覧"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_list.html:18
+msgid "A page representing a list of objects."
+msgstr "オブジェクトのリストを表現するページです。"
+
+#: templates/generate_scaffold/tpls/MODEL_NAME_list.html:23
+#, python-format
+msgid "%(class_name)ss"
+msgstr "%(class_name)s"
+
+#: templates/generate_scaffold/tpls/base.html:9
+msgid "Django Scaffold"
+msgstr "Django Scaffold"
+
+#: templates/generate_scaffold/tpls/base.html:669
+msgid "Views"
+msgstr "ビュー"
+
+#: templates/generate_scaffold/tpls/base.html:673
+msgid "List View"
+msgstr "オブジェクト一覧"
+
+#: templates/generate_scaffold/tpls/base.html:678
+msgid "Create View"
+msgstr "オブジェクト作成"
+
+#: templates/generate_scaffold/tpls/base.html:684
+msgid "Detail View"
+msgstr "オブジェクト詳細"
+
+#: templates/generate_scaffold/tpls/base.html:689
+msgid "Update View"
+msgstr "オブジェクト更新"
+
+#: templates/generate_scaffold/tpls/base.html:694
+msgid "Delete View"
+msgstr "オブジェクト削除"
+
+#: templates/generate_scaffold/tpls/base.html:700
+msgid "Date-based Views"
+msgstr "日付ベースのビュー"
+
+#: templates/generate_scaffold/tpls/base.html:709
+msgid "Date Detail View"
+msgstr "オブジェクト詳細"
+
+#: templates/generate_scaffold/tpls/base.html:741
+msgid ""
+"Presented to you by <a href='http://github.com/modocache/django-generate-"
+"scaffold'>django-generate-scaffold</a>."
+msgstr "このページは<a href='http://github.com/modocache/django-generate-scaffold'>django-generate-scaffold</a>で作成されました。"
+
+#: templates/generate_scaffold/tpls/base.html:743
+msgid "Edit this template file in:"
+msgstr "このテンプレートの在り処："
+
+#: templates/generate_scaffold/tpls/object_table_detail.html:9
+msgid "Field"
+msgstr "フィールド"
+
+#: templates/generate_scaffold/tpls/object_table_detail.html:12
+msgid "Value"
+msgstr "値"
+
+#: templates/generate_scaffold/tpls/object_table_list.html:6
+#, python-format
+msgid ""
+"Click on the primary key value to access the individual %(class_name)s's "
+"page."
+msgstr "キーをクリックしたら%(class_name)sの詳細ページが表示されます。"

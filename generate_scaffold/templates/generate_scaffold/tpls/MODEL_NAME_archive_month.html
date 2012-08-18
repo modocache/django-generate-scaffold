@@ -1,4 +1,9 @@
+{% load i18n %}
+
 {% templatetag openblock %} extends '{{ app_name }}/{{ model_slug }}/base.html' {% templatetag closeblock %}
+
+{% templatetag openblock %} load i18n {% templatetag closeblock %}
+
 {% templatetag openblock %} block filename {% templatetag closeblock %}
   {{ filename }}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
@@ -6,7 +11,7 @@
   <ul class='breadcrumb'>
     <li>
       <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_archive_index {% templatetag closeblock %}'>
-        Archive Index
+        {% templatetag openblock %} trans "Archive Index" {% templatetag closeblock %}
       </a>
       <span class='divider'>
         /
@@ -14,7 +19,7 @@
     </li>
     <li>
       <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_year_archive year=month.year {% templatetag closeblock %}'>
-        Year Archive
+        {% templatetag openblock %} trans "{% trans "Year Archive" %}" {% templatetag closeblock %}
       </a>
       <span class='divider'>
         /
@@ -22,18 +27,18 @@
     </li>
     <li>
       <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_month_archive year=month.year month=month.month {% templatetag closeblock %}'>
-        Month Archive
+        {% templatetag openblock %} trans "{% trans "Month Archive" %}" {% templatetag closeblock %}
       </a>
     </li>
   </ul>
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 {% templatetag openblock %} block header-link {% templatetag closeblock %}
   <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_month_archive year=month.year month=month.month {% templatetag closeblock %}'>
-    {{ class_name }} Month Archive
+    {% templatetag openblock %} trans "{% blocktrans %}{{ class_name }} Month Archive{% endblocktrans %}" {% templatetag closeblock %}
   </a>
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 {% templatetag openblock %} block header-description {% templatetag closeblock %}
-  A monthly archive page showing all objects in a given month.
+  {% templatetag openblock %} trans "{% trans "A monthly archive page showing all objects in a given month." %}" {% templatetag closeblock %}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 {% templatetag openblock %} block content {% templatetag closeblock %}
   <h2>
@@ -43,13 +48,15 @@
     {% templatetag openblock %} for date in date_list {% templatetag closeblock %}
       <li>
         <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_day_archive year=date.year month=date.month day=date.day {% templatetag closeblock %}'>
-          {% templatetag openvariable %} date {% templatetag closevariable %}
+          {% templatetag openvariable %} date|date:"M. d, Y" {% templatetag closevariable %}
         </a>
       </li>
     {% templatetag openblock %} endfor {% templatetag closeblock %}
   </ul>
   <h2>
-    {{ class_name }}s created in the month of {% templatetag openvariable %} month|date:"M Y" {% templatetag closevariable %}
+    {% templatetag openblock %} blocktrans {% templatetag closeblock %}
+      {% blocktrans %}{{ class_name }}s created in the month of {% endblocktrans %}{% templatetag openvariable %} month|date:"M Y" {% templatetag closevariable %}
+    {% templatetag openblock %} endblocktrans {% templatetag closeblock %}
   </h2>
   {% templatetag openblock %} include '{{ app_name }}/{{ model_slug }}/object_table_list.html' {% templatetag closeblock %}
   {% templatetag openblock %} include '{{ app_name }}/{{ model_slug }}/pagination.html' {% templatetag closeblock %}

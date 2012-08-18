@@ -1,3 +1,4 @@
+import codecs
 import os
 import shutil
 import StringIO
@@ -118,7 +119,7 @@ class FilesystemTransaction(object):
         if self.is_dry_run:
             return Filelike()
         else:
-            return open(filename, mode)
+            return codecs.open(filename, encoding='utf-8', mode=mode)
 
     def mkdir(self, dirname):
         if os.path.exists(dirname):

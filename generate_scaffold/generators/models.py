@@ -22,10 +22,11 @@ class ModelsGenerator(BaseGenerator):
 
     def render_field(self, field_name, field_key_alias, other_model=None):
         original_field_name = field_name
-        field_name = get_valid_variable(field_name).lower()
+        field_name = get_valid_variable(field_name)
         if not field_name:
             raise GeneratorError(
                 '{0} is not a valid field name.'.format(original_field_name))
+        field_name = field_name.lower()
 
         field_key = self.get_field_key(field_key_alias)
         if not field_key:
@@ -50,6 +51,7 @@ class ModelsGenerator(BaseGenerator):
         return tpl.render(context)
 
     def render_model(self, model_name, fields, add_timestamp=True):
+        # FIXME - Ensure model_name is valid
         rendered_fields = [self.render_field(*field) for field in fields]
 
         app_models_module = self.get_app_module('models')
