@@ -1,4 +1,4 @@
-# django-generate-scaffold [![build-status](https://secure.travis-ci.org/modocache/django-generate-scaffold.png)](http://travis-ci.org/#!/modocache/django-generate-scaffold)
+# django-generate-scaffold [![build-status](https://secure.travis-ci.org/modocache/django-generate-scaffold.png)](http://travis-ci.org/#!/modocache/django-generate-scaffold) [![endorse](http://api.coderwall.com/modocache/endorsecount.png)](http://coderwall.com/modocache)
 
 Generate a Django model, views, URLconf, and templates using a single command.
 
