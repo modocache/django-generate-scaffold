@@ -35,6 +35,9 @@ FIELD_ALIASES = {
     'positiveintegerfield': [
         'posint', 'positiveint', 'positiveinteger', 'positiveintegerfield'
     ],
+    'positivesmallintegerfield': [
+        'positivesmallint', 'positivesmallinteger', 'positivesmallintegerfield'
+    ],
     'slugfield': ['slug', 'slugfield'],
     'smallintegerfield': ['smallint', 'smallinteger', 'smallintegerfield'],
     'textfield': ['text', 'textfield'],
@@ -70,7 +73,7 @@ class BaseGenerator(object):
 
         return module
 
-    def get_timestamp_field(self, model, timestamp_fieldname):
+    def get_timestamp_field(self, model, timestamp_fieldname=None):
         if timestamp_fieldname:
             try:
                 timestamp_field = model._meta.get_field(timestamp_fieldname)

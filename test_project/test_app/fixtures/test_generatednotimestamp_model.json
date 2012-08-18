@@ -1,0 +1,10 @@
+[
+    {
+        "pk": 1,
+        "model": "test_app.generatednotimestampmodel",
+        "fields": {
+            "title": "Generated No Timestamp Model Fixture",
+            "description": "Find me in test_project/test_app/fixtures/test_generatednotimestamp_model.json"
+        }
+    }
+]

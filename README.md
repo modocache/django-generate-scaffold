@@ -1,11 +1,13 @@
-# django-generate-scaffold [![endorse](http://api.coderwall.com/modocache/endorsecount.png)](http://coderwall.com/modocache)
+# django-generate-scaffold [![build-status](https://secure.travis-ci.org/modocache/django-generate-scaffold.png)](http://travis-ci.org/#!/modocache/django-generate-scaffold) [![endorse](http://api.coderwall.com/modocache/endorsecount.png)](http://coderwall.com/modocache)
 
 Generate a Django model, views, URLconf, and templates using a single command.
+
 
 ## Quickstart
 
 A screencast introducing `django-generate-scaffold` is
 available [here](http://vimeo.com/42399125).
+
 
 ## Usage
 
@@ -58,15 +60,35 @@ issues when rendering templates.
 ## Development
 
 `django-generate-scaffold` is currently in ALPHA.
-Everything works, but tests are not available at this time.
+
+### Running Tests
+
+In order to run the test suite, install your local version of `django-generate-scaffold`
+and start a Selenium server and issue the following commands:
+
+        $ cd django-generate-scaffold
+        $ python setup.py install --force
+        $ cd test_project
+        $ python test_app/tests/runtests.py
+
+Consult `.travis.yml` for the exact steps necessary to run the test
+suite.
+
+#### Autotesting via watchr
+
+By installing the gems in the Gemfile, you can automatically run all non-Selenium
+based tests every time a file is modified:
+
+        $ watchr autotest.rb
+
+### How to Contribute
+
+- Propose new features or report bugs by creating an issue on Github.
+- Add new features, tests, or fix stuff and issue a pull request.
+- Create a better, more eloquent screencast with less stammering.
+
 
 ## Issues
 
 If you experience any issues, please
 [create an issue on Github](https://github.com/modocache/django-generate-scaffold/issues).
-
-## How to Contribute
-
-- Propose new features or report bugs by creating an issue on Github.
-- Add new features, tests, or fix stuff and issue a pull request.
-- Create a better, more eloquent screencast with less stammering.

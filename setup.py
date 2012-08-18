@@ -21,6 +21,7 @@ setup(
         'generate_scaffold.utils',
     ],
     package_data={'generate_scaffold': [
+        'locale/ja/LC_MESSAGES/django.mo',
         'templates/generate_scaffold/models/*.txt',
         'templates/generate_scaffold/models/fields/*.txt',
         'templates/generate_scaffold/tpls/*.html',

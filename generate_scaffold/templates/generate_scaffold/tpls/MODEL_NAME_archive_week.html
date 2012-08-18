@@ -1,19 +1,30 @@
+{% load i18n %}
+
 {% templatetag openblock %} extends '{{ app_name }}/{{ model_slug }}/base.html' {% templatetag closeblock %}
+
+{% templatetag openblock %} load i18n {% templatetag closeblock %}
+
 {% templatetag openblock %} block filename {% templatetag closeblock %}
   {{ filename }}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
+
 {% templatetag openblock %} block title {% templatetag closeblock %}
-  {{ class_name }} Week Archive
+  {% templatetag openblock %} trans "{% blocktrans %}{{ class_name }} Week Archive{% endblocktrans %}" {% templatetag closeblock %}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
+
 {% templatetag openblock %} block header-link {% templatetag closeblock %}
-  {{ class_name }} Week Archive
+  {% templatetag openblock %} trans "{% blocktrans %}{{ class_name }} Week Archive{% endblocktrans %}" {% templatetag closeblock %}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
+
 {% templatetag openblock %} block header-description {% templatetag closeblock %}
-  A weekly archive page showing all objects in a given week.
+  {% templatetag openblock %} trans "{% trans "A weekly archive page showing all objects in a given week." %}" {% templatetag closeblock %}
 {% templatetag openblock %} endblock {% templatetag closeblock %}
+
 {% templatetag openblock %} block content {% templatetag closeblock %}
   <h2>
-    {{ class_name }}s created during the week beginning on {% templatetag openvariable %} week {% templatetag closevariable %}
+    {% templatetag openblock %} blocktrans {% templatetag closeblock %}
+      {% blocktrans %}{{ class_name }}s created during the week beginning on {% endblocktrans %}{% templatetag openvariable %} week {% templatetag closevariable %}
+    {% templatetag openblock %} endblocktrans {% templatetag closeblock %}
   </h2>
   {% templatetag openblock %} include '{{ app_name }}/{{ model_slug }}/object_table_list.html' {% templatetag closeblock %}
   {% templatetag openblock %} include '{{ app_name }}/{{ model_slug }}/pagination.html' {% templatetag closeblock %}
