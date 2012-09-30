@@ -16,7 +16,7 @@ class UrlsGenerator(BaseGenerator):
             hasattr(urls_module, 'urlpatterns')
 
         url_pattern_templates = \
-            get_templates_in_dir('generate_scaffold/urls/urls')
+            get_templates_in_dir('generate_scaffold', 'urls', 'urls')
 
         class_name = model._meta.concrete_model.__name__
         model_slug = slugify(class_name)

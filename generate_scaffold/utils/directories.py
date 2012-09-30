@@ -3,7 +3,8 @@ import os
 from django.template.loaders import app_directories
 
 
-def get_templates_in_dir(dir_suffix):
+def get_templates_in_dir(*dirs):
+    dir_suffix = os.path.sep.join(dirs)
     template_dirs = []
     for app_template_dir in app_directories.app_template_dirs:
         for root, _, _ in os.walk(app_template_dir):
