@@ -10,7 +10,7 @@ class ViewsGenerator(BaseGenerator):
 
     def render_views(self, model, timestamp_fieldname=None):
         views_class_templates = \
-            get_templates_in_dir('generate_scaffold/views/views')
+            get_templates_in_dir('generate_scaffold', 'views', 'views')
 
         class_name = model._meta.concrete_model.__name__
         model_slug = slugify(class_name)
