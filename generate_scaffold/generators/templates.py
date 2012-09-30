@@ -17,7 +17,7 @@ class TemplatesGenerator(BaseGenerator):
             self, model, model_templates_dirpath, timestamp_fieldname=None):
 
         template_templates = \
-            get_templates_in_dir('generate_scaffold/tpls')
+            get_templates_in_dir('generate_scaffold', 'tpls')
 
         class_name = model._meta.concrete_model.__name__
         model_slug = slugify(class_name)
