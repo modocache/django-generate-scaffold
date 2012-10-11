@@ -102,7 +102,7 @@ class FilesystemTransaction(object):
         return os.path.join(self.temp_directory, str(self.counter))
 
     def rollback(self):
-        for entry in self.log:
+        for entry in reversed(self.log):
             entry.rollback()
 
     def commit(self):
