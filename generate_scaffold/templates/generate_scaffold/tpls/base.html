@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
   {% templatetag openblock %} load i18n {% templatetag closeblock %}
+  {% templatetag openblock %} load url from future {% templatetag closeblock %}
   <head>
     <title>
       {% templatetag openblock %} block title {% templatetag closeblock %}
@@ -655,7 +656,7 @@
         <div class='page-header site-header'>
           <h1>
             {% templatetag openblock %} block header {% templatetag closeblock %}
-              <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_list {% templatetag closeblock %}'>
+              <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_list' {% templatetag closeblock %}'>
                 {% templatetag openblock %} trans "{{ class_name }}s" {% templatetag closeblock %}
               </a>
             {% templatetag openblock %} endblock {% templatetag closeblock %}
@@ -669,12 +670,12 @@
                     {% templatetag openblock %} trans "{% trans "Views" %}" {% templatetag closeblock %}
                   </li>
                   <li>
-                    <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_list {% templatetag closeblock %}'>
+                    <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_list' {% templatetag closeblock %}'>
                       {% templatetag openblock %} trans "{% trans "List View" %}" {% templatetag closeblock %}
                     </a>
                   </li>
                   <li>
-                    <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_create {% templatetag closeblock %}'>
+                    <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_create' {% templatetag closeblock %}'>
                       {% templatetag openblock %} trans "{% trans "Create View" %}" {% templatetag closeblock %}
                     </a>
                   </li>
@@ -685,12 +686,12 @@
                       </a>
                     </li>
                     <li>
-                      <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_update pk=object.pk {% templatetag closeblock %}'>
+                      <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_update' pk=object.pk {% templatetag closeblock %}'>
                         {% templatetag openblock %} trans "{% trans "Update View" %}" {% templatetag closeblock %}
                       </a>
                     </li>
                     <li>
-                      <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_delete pk=object.pk {% templatetag closeblock %}'>
+                      <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_delete' pk=object.pk {% templatetag closeblock %}'>
                         {% templatetag openblock %} trans "{% trans "Delete View" %}" {% templatetag closeblock %}
                       </a>
                     </li>
@@ -700,12 +701,12 @@
                     {% templatetag openblock %} trans "{% trans "Date-based Views" %}" {% templatetag closeblock %}
                   </li>
                   <li>
-                    <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_archive_index {% templatetag closeblock %}'>
+                    <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_archive_index' {% templatetag closeblock %}'>
                       {% templatetag openblock %} trans "{% trans "Archive Index" %}" {% templatetag closeblock %}
                     </a>
                   </li>
                   {% templatetag openblock %} if object {% templatetag closeblock %}
-                    <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_date_detail year=object.{{ timestamp_field }}.year month=object.{{ timestamp_field }}.month day=object.{{ timestamp_field }}.day pk=object.pk {% templatetag closeblock %}'>
+                    <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_date_detail' year=object.{{ timestamp_field }}.year month=object.{{ timestamp_field }}.month day=object.{{ timestamp_field }}.day pk=object.pk {% templatetag closeblock %}'>
                       {% templatetag openblock %} trans "{% trans "Date Detail View" %}" {% templatetag closeblock %}
                     </a>
                   {% templatetag openblock %} endif {% templatetag closeblock %}
