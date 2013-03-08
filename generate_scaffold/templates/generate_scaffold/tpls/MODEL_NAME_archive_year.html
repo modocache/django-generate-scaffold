@@ -20,7 +20,7 @@
       </span>
     </li>
     <li>
-      <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_year_archive' year=year {% templatetag closeblock %}'>
+      <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_year_archive' year={{ context_keys.year }} {% templatetag closeblock %}'>
         {% templatetag openblock %} trans "{% trans "Year Archive" %}" {% templatetag closeblock %}
       </a>
     </li>
@@ -28,7 +28,7 @@
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 
 {% templatetag openblock %} block header-link {% templatetag closeblock %}
-  <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_year_archive' year=year {% templatetag closeblock %}'>
+  <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_year_archive' year={{ context_keys.year }} {% templatetag closeblock %}'>
     {% templatetag openblock %} trans "{% blocktrans %}{{ class_name }} Year Archive{% endblocktrans %}" {% templatetag closeblock %}
   </a>
 {% templatetag openblock %} endblock {% templatetag closeblock %}

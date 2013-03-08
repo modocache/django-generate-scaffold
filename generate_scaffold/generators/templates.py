@@ -1,5 +1,6 @@
 import os
 
+from django import VERSION as DJANGO_VERSION
 from django.template import Context
 from django.template.defaultfilters import slugify
 from django.template.loader import get_template
@@ -27,6 +28,10 @@ class TemplatesGenerator(BaseGenerator):
             model, timestamp_fieldname)
         is_timestamped = True if timestamp_field else False
 
+        context_keys = {
+            'year': 'year.year' if DJANGO_VERSION >= (1, 5) else 'year'
+        }
+
         for template_template in template_templates:
 
             if not is_timestamped and '_archive' in template_template:
@@ -44,6 +49,7 @@ class TemplatesGenerator(BaseGenerator):
                 'class_name': class_name,
                 'filename': dst_abspath,
                 'is_timestamped': is_timestamped,
+                'context_keys': context_keys
             }
             if is_timestamped:
                 c['timestamp_field'] = timestamp_field.name
