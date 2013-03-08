@@ -3,6 +3,7 @@
 {% templatetag openblock %} extends '{{ app_name }}/{{ model_slug }}/base.html' {% templatetag closeblock %}
 
 {% templatetag openblock %} load i18n {% templatetag closeblock %}
+{% templatetag openblock %} load url from future {% templatetag closeblock %}
 
 {% templatetag openblock %} block filename {% templatetag closeblock %}
   {{ filename }}
@@ -11,7 +12,7 @@
 {% templatetag openblock %} block breadcrumbs {% templatetag closeblock %}
   <ul class='breadcrumb'>
     <li>
-      <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_archive_index {% templatetag closeblock %}'>
+      <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_archive_index' {% templatetag closeblock %}'>
         {% templatetag openblock %} trans "{% trans "Archive Index" %}" {% templatetag closeblock %}
       </a>
       <span class='divider'>
@@ -19,7 +20,7 @@
       </span>
     </li>
     <li>
-      <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_year_archive year=year {% templatetag closeblock %}'>
+      <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_year_archive' year={{ context_keys.year }} {% templatetag closeblock %}'>
         {% templatetag openblock %} trans "{% trans "Year Archive" %}" {% templatetag closeblock %}
       </a>
     </li>
@@ -27,7 +28,7 @@
 {% templatetag openblock %} endblock {% templatetag closeblock %}
 
 {% templatetag openblock %} block header-link {% templatetag closeblock %}
-  <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_year_archive year=year {% templatetag closeblock %}'>
+  <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_year_archive' year={{ context_keys.year }} {% templatetag closeblock %}'>
     {% templatetag openblock %} trans "{% blocktrans %}{{ class_name }} Year Archive{% endblocktrans %}" {% templatetag closeblock %}
   </a>
 {% templatetag openblock %} endblock {% templatetag closeblock %}
@@ -41,7 +42,7 @@
   <ul class='nav nav-tabs nav-stacked'>
     {% templatetag openblock %} for date in date_list {% templatetag closeblock %}
       <li>
-        <a href='{% templatetag openblock %} url {{ app_name }}_{{ model_slug }}_month_archive year=date.year month=date.month {% templatetag closeblock %}'>
+        <a href='{% templatetag openblock %} url '{{ app_name }}_{{ model_slug }}_month_archive' year=date.year month=date.month {% templatetag closeblock %}'>
           {% templatetag openvariable %} date|date:"M Y" {% templatetag closevariable %}
         </a>
       </li>
