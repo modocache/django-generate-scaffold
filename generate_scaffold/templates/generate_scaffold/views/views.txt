@@ -17,7 +17,7 @@ class {{ class_name }}View(object):
         tpl = super({{ class_name }}View, self).get_template_names()[0]
         app = self.model._meta.app_label
         mdl = '{{ model_slug }}'
-        self.template_name = tpl.replace(app, '{0}/{1}'.format(app, mdl))
+        self.template_name = "/".join([app, mdl] + tpl.split('/')[1:])
         return [self.template_name]
 
 
