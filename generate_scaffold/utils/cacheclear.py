@@ -10,7 +10,7 @@ def reload_django_appcache():
     cache.app_store = SortedDict()
     cache.app_models = SortedDict()
     cache.app_errors = {}
-    cache.handled = {}
+    cache.handled = set()
     cache.loaded = False
 
     for app in cache.get_apps():
