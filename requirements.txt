@@ -1,5 +1,5 @@
 CherryPy==3.2.2
-Django==1.4.1
+Django==1.11.28
 distribute==0.6.24
 django-nose==1.1
 django-nose-selenium==0.7.3
