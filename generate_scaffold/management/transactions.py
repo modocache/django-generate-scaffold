@@ -1,11 +1,11 @@
 import codecs
 import os
 import shutil
-import StringIO
+from io import StringIO
 import tempfile
 
 
-class Filelike(StringIO.StringIO):
+class Filelike(StringIO):
     def __enter__(self):
         return self
 
@@ -28,15 +28,15 @@ class FileModification(object):
     def execute(self):
         self.backup_path = self.transaction.generate_path()
         shutil.copy2(self.filename, self.backup_path)
-        self.transaction.msg('backup', self.filename)
+        self.transaction.msg("backup", self.filename)
 
     def rollback(self):
         if not self.transaction.is_dry_run:
             shutil.copy2(self.backup_path, self.filename)
-        self.transaction.msg('revert', self.filename)
+        self.transaction.msg("revert", self.filename)
 
     def commit(self):
-        self.transaction.msg('append', self.filename)
+        self.transaction.msg("append", self.filename)
         os.remove(self.backup_path)
 
 
@@ -49,12 +49,12 @@ class FileCreation(object):
         pass
 
     def commit(self):
-        self.transaction.msg('create', self.filename)
+        self.transaction.msg("create", self.filename)
 
     def rollback(self):
         if not self.transaction.is_dry_run:
             os.remove(self.filename)
-        self.transaction.msg('revert', self.filename)
+        self.transaction.msg("revert", self.filename)
 
 
 class DirectoryCreation(object):
@@ -65,7 +65,7 @@ class DirectoryCreation(object):
     def execute(self):
         if not self.transaction.is_dry_run:
             os.mkdir(self.dirname)
-        self.transaction.msg('create', self.dirname)
+        self.transaction.msg("create", self.dirname)
 
     def commit(self):
         pass
@@ -73,7 +73,7 @@ class DirectoryCreation(object):
     def rollback(self):
         if not self.transaction.is_dry_run:
             os.rmdir(self.dirname)
-        self.transaction.msg('revert', self.dirname)
+        self.transaction.msg("revert", self.dirname)
 
 
 class FilesystemTransaction(object):
@@ -94,7 +94,7 @@ class FilesystemTransaction(object):
             self.rollback()
 
     def msg(self, action, msg):
-        if hasattr(self.delegate, 'msg'):
+        if hasattr(self.delegate, "msg"):
             self.delegate.msg(action, msg)
 
     def generate_path(self):
@@ -119,11 +119,11 @@ class FilesystemTransaction(object):
         if self.is_dry_run:
             return Filelike()
         else:
-            return codecs.open(filename, encoding='utf-8', mode=mode)
+            return codecs.open(filename, encoding="utf-8", mode=mode)
 
     def mkdir(self, dirname):
         if os.path.exists(dirname):
-            self.msg('exists', dirname)
+            self.msg("exists", dirname)
         else:
             modification = DirectoryCreation(self, dirname)
             modification.execute()

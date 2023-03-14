@@ -1,14 +1,13 @@
 import os
+from collections import OrderedDict
 
-from django.db.models.loading import AppCache
-from django.utils.datastructures import SortedDict
+from django.core.cache import cache
+from importlib import reload
 
 
 def reload_django_appcache():
-    cache = AppCache()
-
-    cache.app_store = SortedDict()
-    cache.app_models = SortedDict()
+    cache.app_store = OrderedDict()
+    cache.app_models = OrderedDict()
     cache.app_errors = {}
     cache.handled = {}
     cache.loaded = False
@@ -20,6 +19,5 @@ def reload_django_appcache():
 
 def clean_pyc_in_dir(dirpath):
     for root, _, files in os.walk(dirpath):
-        for f in [f for f in files if os.path.splitext(f)[-1] == '.pyc']:
+        for f in [f for f in files if os.path.splitext(f)[-1] == ".pyc"]:
             os.remove(os.path.join(root, f))
-

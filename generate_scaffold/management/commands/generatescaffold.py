@@ -1,13 +1,12 @@
 import os
-from optparse import make_option
 
 from django.conf import settings
-from django.core.management.base import BaseCommand, CommandError
-from django.db.models import get_model
+from django.core.management.base import BaseCommand, CommandError, CommandParser
+from django.apps import apps
 from django.template.defaultfilters import slugify
 from django.utils import translation
 from django.utils.encoding import smart_str
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext_lazy as _
 
 from generate_scaffold.generators import (
     ModelsGenerator,
@@ -33,19 +32,20 @@ class Command(VerboseCommandMixin, BaseCommand):
         "manage.py {cmd_name} blogs Post title:char body:text "
         "blog:foreignkey=Blog".format(cmd_name=command_name)
     )
-    option_list = BaseCommand.option_list + (
-        make_option(
+
+    def add_arguments(self, parser: CommandParser) -> None:
+        parser.add_argument(
             "-d",
             "--dry-run",
             action="store_true",
             dest="dry_run",
             default=False,
             help=_("Do not actually do anything, but print what " "would have happened to the console."),
-        ),
-        make_option(
+        )
+        parser.add_argument(
             "-m", "--model", dest="existing_model", help=_("An existing model to generate views/templates for.")
         ),
-        make_option(
+        parser.add_argument(
             "-t",
             "--timestamp-field",
             dest="timestamp_fieldname",
@@ -55,7 +55,7 @@ class Command(VerboseCommandMixin, BaseCommand):
                 "via the `--model` option."
             ),
         ),
-        make_option(
+        parser.add_argument(
             "-n",
             "--no-timestamps",
             action="store_false",
@@ -63,7 +63,6 @@ class Command(VerboseCommandMixin, BaseCommand):
             default=True,
             help=_("Do not automatically append created_at and updated_at " "DateTimeFields to generated models."),
         ),
-    )
 
     def handle(self, *args, **options):
         if settings.USE_I18N:
@@ -199,7 +198,7 @@ class Command(VerboseCommandMixin, BaseCommand):
                 exec(code in globals())
                 generated_model = globals()["generated_model"]
             else:
-                generated_model = get_model(app_name, model_name)
+                generated_model = apps.get_model(app_name, model_name)
 
             if not generated_model:
                 raise CommandError(smart_str(_("Something when wrong when generating model " "{0}".format(model_name))))
